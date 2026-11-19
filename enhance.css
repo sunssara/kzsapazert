@@ -443,3 +443,22 @@ main .eyebrow, main .small, #request-help,
   .hero .hero-copy h1:lang(zh-CN) { font-size: clamp(2rem, 8.3vw, 3.625rem); }
   main h2 { text-wrap: initial; }
 }
+
+@media (max-width: 760px) {
+  :root { --section-space: 52px; --grid-gap: 24px; --type-card: 1.375rem; }
+  .hero .hero-copy h1, .hero .hero-copy h1:lang(ru), .hero .hero-copy h1:lang(zh-CN) { font-size: clamp(1.875rem, 8vw, 3rem); line-height: 1.12; overflow-wrap: anywhere; }
+  .hero-copy { padding-block: 64px 32px; }
+  .hero .lead { margin-block: 16px 24px; }
+  .hero-proof { margin-top: 24px; padding-top: 16px; }
+  main .eyebrow { margin-bottom: 12px; letter-spacing: .09em; }
+  .section-head, .benefits .benefit-grid { margin-block: 0 24px; }
+  .benefits .benefit-grid { margin-block: 24px 0; }
+  .benefits .benefit-grid article { padding: 20px; }
+  .service-item { padding-block: 16px; }
+  .field-section > div { padding: 24px; }
+  .accreditation h2 { margin-bottom: 16px; }
+  .accreditation .actions { margin-top: 24px; gap: 16px; }
+  .contact-details { margin-top: 24px; }
+  #request-form { padding: 20px; }
+  footer { padding-block: 24px; gap: 16px; }
+}
