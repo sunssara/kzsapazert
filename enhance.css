@@ -390,3 +390,14 @@ header .brand { flex: 0 0 156px; } header .brand img { width: 100%; max-height: 
 @media (prefers-reduced-motion: reduce) {
   .benefits .benefit-grid article { transition: none; }
 }
+
+.hero-photo > img { animation: none; translate: none; }
+.hero-photo::after { background: linear-gradient(90deg, #083576 0%, #083576 26%, #083576e8 42%, #08357600 83%); }
+@media (min-width: 761px) {
+  .hero-photo { left: 22%; }
+  .hero-photo::after { background: linear-gradient(90deg, #083576 0%, #083576e8 20%, #08357655 49%, transparent 76%); }
+  .hero-photo > img { object-position: center 66%; }
+}
+@media (max-width: 760px) {
+  .hero-photo::after { background: linear-gradient(0deg, #083576 6%, #083576ed 47%, #08357670 70%, transparent 100%); }
+}
