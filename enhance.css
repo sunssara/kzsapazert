@@ -471,3 +471,17 @@ main .eyebrow, main .small, #request-help,
 .project-close { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border: 0; border-radius: 9px; background: #ffffff26; color: white; font-size: 24px; cursor: pointer; }
 body:has(#project-dialog[open]) { overflow: hidden; }
 .benefits .benefit-grid article:nth-child(2):not(:hover) .benefit-copy h3 { color: var(--blue); } @media (hover: none) { .benefits .benefit-grid article:nth-child(2) .benefit-copy h3 { color: var(--blue); } }
+
+@media (min-width: 881px) {
+  .benefits .benefit-grid article:is(:first-child, :last-child) { position: relative; }
+  .benefits .benefit-grid article:is(:first-child, :last-child)::after {
+    content: '';
+    position: absolute;
+    inset-block: -1px;
+    width: clamp(12px, 1.75vw, 24px);
+    background: inherit;
+    border-block: 1px solid #bdc7d1;
+  }
+  .benefits .benefit-grid article:first-child::after { right: 100%; }
+  .benefits .benefit-grid article:last-child::after { left: 100%; }
+}
