@@ -395,3 +395,17 @@ header .brand { flex: 0 0 156px; } header .brand img { width: 100%; max-height: 
 @media (max-width: 760px) {
   #site-nav a { font-size: 1.125rem; }
 }
+
+.field-section {
+  width: min(1200px, calc(100% - 2 * var(--gutter)));
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 16px;
+}
+.field-section > img { height: clamp(340px, 39vw, 490px); }
+.field-section > div { padding: clamp(24px, 4.5vw, 60px); }
+@media (max-width: 760px) {
+  .field-section { grid-template-columns: minmax(0, 1fr); }
+  .field-section > img { height: clamp(220px, 63vw, 340px); }
+}
