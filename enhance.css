@@ -463,3 +463,10 @@ main .eyebrow, main .small, #request-help,
   #request-form { padding: 20px; }
   footer { padding-block: 24px; gap: 16px; }
 }
+
+#project-dialog { width: min(460px, calc(100% - 32px)); max-height: 88dvh; padding: 0; border: 0; border-radius: 18px; background: var(--blue); color: white; }
+#project-dialog::backdrop { background: #061528a8; }
+#project-dialog #request-form { margin: 0; border: 0; padding: 24px; }
+#project-dialog h3 { padding-right: 38px; }
+.project-close { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border: 0; border-radius: 9px; background: #ffffff26; color: white; font-size: 24px; cursor: pointer; }
+body:has(#project-dialog[open]) { overflow: hidden; }

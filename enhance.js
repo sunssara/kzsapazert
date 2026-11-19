@@ -86,3 +86,25 @@ document.addEventListener('keydown', event => {
 });
 document.querySelector('#language').addEventListener('change', () => setMenu(false));
 setMenu(false);
+
+const projectDialog = document.querySelector('#project-dialog');
+const projectFormHome = requestForm.parentElement;
+const projectClose = projectDialog.querySelector('.project-close');
+let projectTrigger;
+document.querySelectorAll('a[data-t="cta"][href="#request-form"]').forEach(trigger => {
+  trigger.setAttribute('aria-haspopup', 'dialog');
+  trigger.addEventListener('click', event => {
+    if (!projectDialog.showModal) return;
+    event.preventDefault();
+    projectTrigger = trigger;
+    projectClose.ariaLabel = {ru:'Закрыть',kk:'Жабу',en:'Close',zh:'关闭'}[document.querySelector('#language').value];
+    projectDialog.append(requestForm);
+    projectDialog.showModal();
+    projectClose.focus();
+  });
+});
+projectClose.addEventListener('click', () => projectDialog.close());
+projectDialog.addEventListener('close', () => {
+  projectFormHome.append(requestForm);
+  projectTrigger?.focus({preventScroll:true});
+});
