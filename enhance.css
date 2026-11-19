@@ -390,3 +390,8 @@ header .brand { flex: 0 0 156px; } header .brand img { width: 100%; max-height: 
 @media (prefers-reduced-motion: reduce) {
   .benefits .benefit-grid article { transition: none; }
 }
+
+#site-nav a { font-size: 1rem; }
+@media (max-width: 760px) {
+  #site-nav a { font-size: 1.125rem; }
+}
