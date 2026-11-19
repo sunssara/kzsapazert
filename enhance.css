@@ -490,3 +490,8 @@ body:has(#project-dialog[open]) { overflow: hidden; }
   .field-section { min-height: clamp(340px, 39vw, 490px); }
   .field-section > img { height: 0; min-height: 100%; align-self: stretch; }
 }
+
+.benefits .benefit-grid { clip-path: inset(0 round 16px); }
+@media (min-width: 881px) {
+  .benefits .benefit-grid { clip-path: inset(0 calc(-1 * clamp(12px, 1.75vw, 24px)) round 16px); }
+}
