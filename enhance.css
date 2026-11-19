@@ -415,3 +415,31 @@ header .brand { flex: 0 0 156px; } header .brand img { width: 100%; max-height: 
 .field-section .eyebrow { color: var(--blue); }
 .field-section .button { background: var(--blue); color: white; }
 .field-section .button:hover { background: #154d98; }
+
+/* Shared type scale for the landing page. */
+:root {
+  --type-section: clamp(2.125rem, 5vw, 4.375rem);
+  --type-card: clamp(1.375rem, 2vw, 1.875rem);
+  --type-body: 1rem;
+  --type-caption: .875rem;
+}
+.hero .hero-copy h1 { font-weight: 600; }
+main h2, main .benefits > h2 {
+  font-size: var(--type-section);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+main h3, .service-item h3, .benefits .benefit-copy h3 {
+  font-size: var(--type-card);
+  line-height: 1.25;
+}
+main p, .benefit-copy p { font-size: var(--type-body); line-height: 1.65; }
+main .lead, main .large { font-size: clamp(1.0625rem, 1.45vw, 1.25rem); }
+main .eyebrow, main .small, #request-help,
+.contact-details span, .certificate span { font-size: var(--type-caption); }
+.certificate span { line-height: 1.45; }
+@media (max-width: 760px) {
+  :root { --type-section: clamp(1.875rem, 7vw, 2.625rem); }
+  .hero .hero-copy h1:lang(zh-CN) { font-size: clamp(2rem, 8.3vw, 3.625rem); }
+  main h2 { text-wrap: initial; }
+}
