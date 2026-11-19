@@ -409,3 +409,9 @@ header .brand { flex: 0 0 156px; } header .brand img { width: 100%; max-height: 
   .field-section { grid-template-columns: minmax(0, 1fr); }
   .field-section > img { height: clamp(220px, 63vw, 340px); }
 }
+
+.field-section { background: #f2f4f7; color: var(--black); }
+.field-section p { color: var(--gray); }
+.field-section .eyebrow { color: var(--blue); }
+.field-section .button { background: var(--blue); color: white; }
+.field-section .button:hover { background: #154d98; }
