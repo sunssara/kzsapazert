@@ -68,3 +68,21 @@ if ('IntersectionObserver' in window) {
   }, { rootMargin: '0px 0px -32px', threshold: 0 });
   document.querySelectorAll('.intro-section .two-col, .section-head, .service-layout, .benefit-grid, .field-section > div, .accreditation > div, .contact-section .two-col').forEach(element => observer.observe(element));
 }
+
+const menuToggle = document.querySelector('.menu-toggle');
+const siteNav = document.querySelector('#site-nav');
+const menuLabels = { ru: ['Открыть меню', 'Закрыть меню'], kk: ['Мәзірді ашу', 'Мәзірді жабу'], en: ['Open menu', 'Close menu'], zh: ['打开菜单', '关闭菜单'] };
+function setMenu(open) {
+  menuToggle.setAttribute('aria-expanded', String(open));
+  menuToggle.setAttribute('aria-label', menuLabels[document.querySelector('#language').value][Number(open)]);
+}
+menuToggle.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
+siteNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+    setMenu(false);
+    menuToggle.focus();
+  }
+});
+document.querySelector('#language').addEventListener('change', () => setMenu(false));
+setMenu(false);
