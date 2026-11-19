@@ -495,3 +495,40 @@ body:has(#project-dialog[open]) { overflow: hidden; }
 @media (min-width: 881px) {
   .benefits .benefit-grid { clip-path: inset(0 calc(-1 * clamp(12px, 1.75vw, 24px)) round 16px); }
 }
+
+#request-success {
+  width: min(400px, calc(100% - 32px));
+  padding: clamp(24px, 6vw, 40px);
+  border: 1px solid #dce8f6;
+  border-radius: 24px;
+  background: radial-gradient(ellipse at top, #e7f1ff, transparent 68%), white;
+  color: #102745;
+  box-shadow: 0 28px 90px #020c2566;
+  text-align: center;
+}
+#request-success::backdrop { background: rgb(4 14 32 / 76%); backdrop-filter: blur(5px); }
+#request-success h3 { font-size: var(--type-card); line-height: 1.25; }
+.success-mark {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  aspect-ratio: 1;
+  margin: 0 auto 18px;
+  border: 1px solid #aac7ea;
+  border-radius: 20px;
+  background: #e0edfd;
+  color: var(--blue);
+}
+.success-mark::after {
+  content: '';
+  width: 22px;
+  height: 12px;
+  border: solid currentColor;
+  border-width: 0 0 3px 3px;
+  transform: translateY(-3px) rotate(-45deg);
+}
+#request-success .button { width: 100%; margin-top: 24px; border: 0; cursor: pointer; }
+body:has(#request-success[open]) { overflow: hidden; }
+@media (prefers-reduced-motion: no-preference) {
+  #request-success[open] { animation: scroll-enter .25s ease-out both; }
+}
