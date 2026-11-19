@@ -1,8 +1,8 @@
 const formCopy = {
-  ru: ['Заявка на лабораторное сопровождение','Ваше имя','Телефон','Электронная почта','Расскажите о проекте','Отправить заявку','Откроется почтовое приложение с заполненной заявкой. Нажмите «Отправить» в письме.'],
-  kk: ['Зертханалық сүйемелдеуге өтінім','Аты-жөніңіз','Телефон','Электрондық пошта','Жоба туралы айтыңыз','Өтінім жіберу','Дайын өтінім пошта қолданбасында ашылады. Хаттағы «Жіберу» түймесін басыңыз.'],
-  en: ['Request laboratory support','Your name','Phone','Email','Tell us about the project','Send inquiry','Your email app opens with a draft. Select Send in the email app.'],
-  zh: ['申请实验室技术支持','您的姓名','电话','电子邮箱','请介绍您的项目','发送申请','邮件应用将打开已填写的草稿。请在邮件应用中点击发送。'],
+  ru: ['Заявка на лабораторное сопровождение','Ваше имя','Телефон','Электронная почта','Расскажите о проекте','Отправить заявку'],
+  kk: ['Зертханалық сүйемелдеуге өтінім','Аты-жөніңіз','Телефон','Электрондық пошта','Жоба туралы айтыңыз','Өтінім жіберу'],
+  en: ['Request laboratory support','Your name','Phone','Email','Tell us about the project','Send inquiry'],
+  zh: ['申请实验室技术支持','您的姓名','电话','电子邮箱','请介绍您的项目','发送申请'],
 };
 
 const requestForm = document.querySelector('#request-form');
@@ -11,7 +11,7 @@ const requestForm = document.querySelector('#request-form');
 function updateEnhancements() {
   const lang = document.querySelector('#language').value;
   const labels = formCopy[lang];
-  requestForm.querySelectorAll('h3,label:not(#request-check-label),button,p').forEach((element, index) => {
+  requestForm.querySelectorAll('h3,label:not(#request-check-label),button').forEach((element, index) => {
     element.textContent = labels[index];
   });
   if (lang === 'kk') {
@@ -31,18 +31,45 @@ function updateEnhancements() {
   }
 }
 
-requestForm.addEventListener('submit', event => {
+const sendCopy = {
+  ru: ['Заявка отправлена', 'Закрыть', 'Не удалось отправить заявку. Повторите попытку или напишите нам по почте.'],
+  kk: ['Өтінім жіберілді', 'Жабу', 'Өтінім жіберілмеді. Қайталап көріңіз немесе бізге пошта арқылы жазыңыз.'],
+  en: ['Inquiry sent', 'Close', 'Could not send your inquiry. Please try again or email us.'],
+  zh: ['申请已发送', '关闭', '发送失败。请重试或通过电子邮件联系我们。'],
+};
+requestForm.addEventListener('submit', async event => {
   event.preventDefault();
-  const labels = formCopy[document.querySelector('#language').value];
   const lang = document.querySelector('#language').value;
-  if (!/^\d{1,2}$/.test(challengeInput.value.trim()) || Number(challengeInput.value) !== challengeAnswer) {
-    challengeInput.setCustomValidity(challengeCopy[lang][1]);
-    challengeInput.reportValidity();
-    return;
+  const [success, close, error] = sendCopy[lang];
+  const status = document.querySelector('#request-help');
+  const submit = requestForm.querySelector('button[type="submit"]');
+  submit.disabled = true;
+  status.textContent = '';
+  try {
+    const response = await fetch('request.php', {method: 'POST', body: new FormData(requestForm)});
+    const result = await response.json();
+    if (!response.ok || !result.ok) {
+      await updateChallenge(true);
+      if (result.error === 'captcha') {
+        challengeInput.setCustomValidity(challengeCopy[lang][1]);
+        challengeInput.reportValidity();
+        return;
+      }
+      throw new Error('Request rejected');
+    }
+    requestForm.reset();
+    if (projectDialog.open) projectDialog.close();
+    const dialog = document.querySelector('#request-success');
+    dialog.querySelector('h3').textContent = success;
+    dialog.querySelector('button').textContent = close;
+    if (dialog.showModal) dialog.showModal();
+    else status.textContent = success;
+    void updateChallenge(true);
+  } catch {
+    status.textContent = error;
+  } finally {
+    submit.disabled = false;
   }
-  const data = new FormData(requestForm);
-  const lines = ['name', 'phone', 'email', 'project'].map((key, index) => `${labels[index + 1]}: ${data.get(key).trim()}`);
-  location.href = `mailto:kz.sapa.zertkhanasy@mail.ru?subject=${encodeURIComponent(labels[0])}&body=${encodeURIComponent(lines.join('\r\n'))}`;
 });
 
 updateEnhancements();
@@ -56,20 +83,27 @@ const challengeCopy = {
   en: ['Verification', 'Enter the correct answer.', 'optional'],
   zh: ['验证', '请输入正确答案。', '选填'],
 };
-let challengeAnswer;
-function updateChallenge(regenerate = false) {
+async function updateChallenge(regenerate = false) {
   const [title, , optional] = challengeCopy[document.querySelector('#language').value];
-  if (regenerate || challengeAnswer === undefined) {
-    const a = 2 + Math.floor(Math.random() * 8);
-    const b = 2 + Math.floor(Math.random() * 8);
-    challengeAnswer = a + b;
-    challengeLabel.dataset.question = a + ' + ' + b;
-    challengeInput.value = '';
-  }
+  requestForm.querySelector('label[for="request-project"]').textContent =
+    formCopy[document.querySelector('#language').value][4] + ' (' + optional + ')';
   challengeInput.setCustomValidity('');
-  challengeLabel.textContent = title + ': ' + challengeLabel.dataset.question + ' = ?';
-  const label = requestForm.querySelector('label[for="request-project"]');
-  label.textContent = formCopy[document.querySelector('#language').value][4] + ' (' + optional + ')';
+  if (!regenerate && challengeLabel.dataset.question) {
+    challengeLabel.textContent = title + ': ' + challengeLabel.dataset.question + ' = ?';
+    return;
+  }
+  challengeInput.value = '';
+  try {
+    const response = await fetch('request.php', {cache:'no-store'});
+    if (!response.ok) throw new Error('Challenge unavailable');
+    const {question} = await response.json();
+    challengeLabel.dataset.question = question;
+    const currentTitle = challengeCopy[document.querySelector('#language').value][0];
+    challengeLabel.textContent = currentTitle + ': ' + question + ' = ?';
+  } catch {
+    challengeLabel.textContent = title;
+    document.querySelector('#request-help').textContent = sendCopy[document.querySelector('#language').value][2];
+  }
 }
 challengeInput.addEventListener('input', () => challengeInput.setCustomValidity(''));
 document.querySelector('#language').addEventListener('change', () => updateChallenge());
