@@ -11,7 +11,7 @@ const requestForm = document.querySelector('#request-form');
 function updateEnhancements() {
   const lang = document.querySelector('#language').value;
   const labels = formCopy[lang];
-  requestForm.querySelectorAll('h3,label,button,p').forEach((element, index) => {
+  requestForm.querySelectorAll('h3,label:not(#request-check-label),button,p').forEach((element, index) => {
     element.textContent = labels[index];
   });
   if (lang === 'kk') {
@@ -34,6 +34,12 @@ function updateEnhancements() {
 requestForm.addEventListener('submit', event => {
   event.preventDefault();
   const labels = formCopy[document.querySelector('#language').value];
+  const lang = document.querySelector('#language').value;
+  if (!/^\d{1,2}$/.test(challengeInput.value.trim()) || Number(challengeInput.value) !== challengeAnswer) {
+    challengeInput.setCustomValidity(challengeCopy[lang][1]);
+    challengeInput.reportValidity();
+    return;
+  }
   const data = new FormData(requestForm);
   const lines = ['name', 'phone', 'email', 'project'].map((key, index) => `${labels[index + 1]}: ${data.get(key).trim()}`);
   location.href = `mailto:kz.sapa.zertkhanasy@mail.ru?subject=${encodeURIComponent(labels[0])}&body=${encodeURIComponent(lines.join('\r\n'))}`;
@@ -41,6 +47,33 @@ requestForm.addEventListener('submit', event => {
 
 updateEnhancements();
 document.querySelector('#language').addEventListener('change', updateEnhancements);
+
+const challengeInput = document.querySelector('#request-check');
+const challengeLabel = document.querySelector('#request-check-label');
+const challengeCopy = {
+  ru: ['Проверка', 'Введите правильный ответ.', 'необязательно'],
+  kk: ['Тексеру', 'Дұрыс жауапты енгізіңіз.', 'міндетті емес'],
+  en: ['Verification', 'Enter the correct answer.', 'optional'],
+  zh: ['验证', '请输入正确答案。', '选填'],
+};
+let challengeAnswer;
+function updateChallenge(regenerate = false) {
+  const [title, , optional] = challengeCopy[document.querySelector('#language').value];
+  if (regenerate || challengeAnswer === undefined) {
+    const a = 2 + Math.floor(Math.random() * 8);
+    const b = 2 + Math.floor(Math.random() * 8);
+    challengeAnswer = a + b;
+    challengeLabel.dataset.question = a + ' + ' + b;
+    challengeInput.value = '';
+  }
+  challengeInput.setCustomValidity('');
+  challengeLabel.textContent = title + ': ' + challengeLabel.dataset.question + ' = ?';
+  const label = requestForm.querySelector('label[for="request-project"]');
+  label.textContent = formCopy[document.querySelector('#language').value][4] + ' (' + optional + ')';
+}
+challengeInput.addEventListener('input', () => challengeInput.setCustomValidity(''));
+document.querySelector('#language').addEventListener('change', () => updateChallenge());
+updateChallenge(true);
 
 const hero = document.querySelector('.hero');
 const motion = matchMedia('(prefers-reduced-motion: no-preference) and (pointer: fine)');
