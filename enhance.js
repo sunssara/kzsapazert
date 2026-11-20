@@ -175,3 +175,48 @@ projectDialog.addEventListener('close', () => {
   projectFormHome.append(requestForm);
   projectTrigger?.focus({preventScroll:true});
 });
+
+const dotSections = [...document.querySelectorAll('main > section')];
+const sectionDots = document.createElement('nav');
+sectionDots.className = 'section-dots';
+const dotLinks = dotSections.map((section, index) => {
+  section.id ||= 'section-' + (index + 1);
+  const link = document.createElement('a');
+  link.href = '#' + section.id;
+  sectionDots.append(link);
+  return link;
+});
+document.body.append(sectionDots);
+
+function labelDots() {
+  const lang = document.querySelector('#language').value;
+  sectionDots.ariaLabel = {ru:'Разделы страницы',kk:'Бет бөлімдері',en:'Page sections',zh:'页面章节'}[lang];
+  dotSections.forEach((section, index) => {
+    const label = section.querySelector('h1,h2').innerText.replace(/\s+/g, ' ').trim();
+    dotLinks[index].ariaLabel = label;
+    dotLinks[index].title = label;
+  });
+}
+let dotsQueued = false;
+function updateDots() {
+  if (dotsQueued) return;
+  dotsQueued = true;
+  requestAnimationFrame(() => {
+    dotsQueued = false;
+    const readingLine = innerHeight * .4;
+    let active = 0;
+    dotSections.forEach((section, index) => {
+      if (section.getBoundingClientRect().top <= readingLine) active = index;
+    });
+    if (scrollY + innerHeight >= document.documentElement.scrollHeight - 2) active = dotSections.length - 1;
+    dotLinks.forEach((link, index) => {
+      if (index === active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  });
+}
+document.querySelector('#language').addEventListener('change', labelDots);
+addEventListener('scroll', updateDots, {passive:true});
+addEventListener('resize', updateDots);
+labelDots();
+updateDots();
