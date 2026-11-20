@@ -539,7 +539,7 @@ body:has(#request-success[open]) { overflow: hidden; }
   .section-dots a { display: grid; place-items: center; width: 30px; height: 24px; }
   .section-dots a::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #b5bec9; }
   .section-dots a:hover::before { background: var(--blue); }
-  .section-dots a[aria-current="location"]::before { background: #00ba69; box-shadow: 0 0 0 4px #00ba6933; }
+  .section-dots a[aria-current="location"]::before { background: var(--blue); box-shadow: 0 0 0 4px #08357633; }
 }
 
 #certificate-gallery { width: min(630px, calc(100% - 24px)); max-height: 94dvh; padding: 16px; border: 0; border-radius: 16px; background: #f2f4f7; color: var(--blue); }
