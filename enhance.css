@@ -583,7 +583,7 @@ body:has(#certificate-gallery[open]) { overflow: hidden; }
 .contact-section .contact-details .contact-cta + [data-t="write"] { margin-top: 0; }
 
 .services-section .section-head { display: block; margin-bottom: clamp(20px, 3vw, 32px); }
-.services-section .section-head > p { max-width: 68ch; margin: 16px 0 0; }
+.services-section .section-head > p { max-width: 80ch; margin: 16px 0 0; }
 .services-section .section-head h2 { text-wrap: initial; }
 .services-section .service-layout { align-items: stretch; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
 .services-section .service-image { min-height: 0; }
