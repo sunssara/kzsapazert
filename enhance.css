@@ -578,3 +578,6 @@ body:has(#certificate-gallery[open]) { overflow: hidden; }
 #certificate-gallery .gallery-prev { left: 0; }
 #certificate-gallery .gallery-next { right: 0; }
 #certificate-gallery .gallery-close { top: 0; right: 0; }
+
+.contact-section .contact-details .contact-cta { margin-block: 20px 24px; }
+.contact-section .contact-details .contact-cta + [data-t="write"] { margin-top: 0; }
