@@ -220,3 +220,52 @@ addEventListener('scroll', updateDots, {passive:true});
 addEventListener('resize', updateDots);
 labelDots();
 updateDots();
+
+const certificateCard = document.querySelector('a.certificate');
+const certificateGallery = document.querySelector('#certificate-gallery');
+const galleryImage = certificateGallery.querySelector('img');
+const galleryPrevious = certificateGallery.querySelector('.gallery-prev');
+const galleryNext = certificateGallery.querySelector('.gallery-next');
+const galleryClose = certificateGallery.querySelector('.gallery-close');
+const galleryLabels = {
+  ru: ['Аттестат аккредитации', 'Предыдущая страница', 'Следующая страница', 'Закрыть'],
+  kk: ['Аккредиттеу аттестаты', 'Алдыңғы бет', 'Келесі бет', 'Жабу'],
+  en: ['Accreditation certificate', 'Previous page', 'Next page', 'Close'],
+  zh: ['认可证书', '上一页', '下一页', '关闭'],
+};
+let galleryPage = 1;
+function showCertificatePage(page) {
+  galleryPage = Math.max(1, Math.min(2, page));
+  const [title, previous, next, close] = galleryLabels[document.querySelector('#language').value];
+  certificateGallery.querySelector('h3').textContent = title;
+  galleryPrevious.ariaLabel = previous;
+  galleryNext.ariaLabel = next;
+  galleryClose.ariaLabel = close;
+  galleryImage.src = 'certificate-page-' + galleryPage + '.webp';
+  galleryImage.alt = title + ' · ' + galleryPage + ' / 2';
+  certificateGallery.querySelector('output').textContent = galleryPage + ' / 2';
+  galleryPrevious.disabled = galleryPage === 1;
+  galleryNext.disabled = galleryPage === 2;
+}
+certificateCard.setAttribute('aria-haspopup', 'dialog');
+certificateCard.addEventListener('click', event => {
+  if (!certificateGallery.showModal || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  showCertificatePage(1);
+  certificateGallery.showModal();
+  galleryClose.focus();
+});
+galleryClose.addEventListener('click', () => certificateGallery.close());
+galleryPrevious.addEventListener('click', () => showCertificatePage(galleryPage - 1));
+galleryNext.addEventListener('click', () => showCertificatePage(galleryPage + 1));
+certificateGallery.addEventListener('keydown', event => {
+  if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+  event.preventDefault();
+  showCertificatePage(galleryPage + (event.key === 'ArrowRight' ? 1 : -1));
+});
+let galleryTouch;
+galleryImage.addEventListener('touchstart', event => { galleryTouch = event.changedTouches[0].clientX; }, {passive:true});
+galleryImage.addEventListener('touchend', event => {
+  const distance = event.changedTouches[0].clientX - galleryTouch;
+  if (Math.abs(distance) > 50) showCertificatePage(galleryPage + (distance < 0 ? 1 : -1));
+}, {passive:true});

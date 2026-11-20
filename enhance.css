@@ -541,3 +541,14 @@ body:has(#request-success[open]) { overflow: hidden; }
   .section-dots a:hover::before { background: var(--blue); }
   .section-dots a[aria-current="location"]::before { background: #00ba69; box-shadow: 0 0 0 4px #00ba6933; }
 }
+
+#certificate-gallery { width: min(630px, calc(100% - 24px)); max-height: 94dvh; padding: 16px; border: 0; border-radius: 16px; background: #f2f4f7; color: var(--blue); }
+#certificate-gallery::backdrop { background: #061528bd; backdrop-filter: blur(4px); }
+#certificate-gallery img { width: 100%; height: min(68dvh, 730px); object-fit: contain; touch-action: pan-y pinch-zoom; }
+.gallery-head, .gallery-controls { display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+.gallery-head { margin-bottom: 10px; }
+.gallery-head h3 { font-size: clamp(18px, 4vw, 24px); }
+.gallery-controls { justify-content: center; margin-top: 10px; }
+#certificate-gallery button { flex: none; width: 44px; height: 44px; border: 0; border-radius: 10px; background: var(--blue); color: white; font-size: 26px; cursor: pointer; }
+#certificate-gallery button:disabled { opacity: .35; cursor: default; }
+body:has(#certificate-gallery[open]) { overflow: hidden; }
