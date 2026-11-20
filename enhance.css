@@ -581,3 +581,14 @@ body:has(#certificate-gallery[open]) { overflow: hidden; }
 
 .contact-section .contact-details .contact-cta { margin-block: 20px 24px; }
 .contact-section .contact-details .contact-cta + [data-t="write"] { margin-top: 0; }
+
+.services-section .section-head { display: block; margin-bottom: clamp(20px, 3vw, 32px); }
+.services-section .section-head > p { max-width: 68ch; margin: 16px 0 0; }
+.services-section .section-head h2 { text-wrap: initial; }
+.services-section .service-layout { align-items: stretch; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+.services-section .service-image { min-height: 0; }
+.services-section .service-image img { position: absolute; inset: 0; height: 100%; }
+.services-section .service-list { align-self: start; }
+@media (max-width: 760px) {
+  .services-section .service-layout { grid-template-columns: minmax(0, 1fr); }
+}
