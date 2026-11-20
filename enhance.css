@@ -552,3 +552,29 @@ body:has(#request-success[open]) { overflow: hidden; }
 #certificate-gallery button { flex: none; width: 44px; height: 44px; border: 0; border-radius: 10px; background: var(--blue); color: white; font-size: 26px; cursor: pointer; }
 #certificate-gallery button:disabled { opacity: .35; cursor: default; }
 body:has(#certificate-gallery[open]) { overflow: hidden; }
+
+#certificate-gallery {
+  width: fit-content;
+  max-width: calc(100% - 16px);
+  max-height: calc(100dvh - 16px);
+  padding: 0 44px;
+  border-radius: 0;
+  background: transparent;
+  color: white;
+  overflow: visible;
+}
+#certificate-gallery .gallery-head { margin: 0; }
+#gallery-title, #certificate-gallery output {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+#certificate-gallery img { width: auto; height: auto; max-width: calc(100vw - 104px); max-height: calc(100dvh - 64px); }
+#certificate-gallery .gallery-controls { margin: 0; }
+#certificate-gallery button { position: absolute; background: transparent; color: white; text-shadow: 0 1px 5px #061528; }
+#certificate-gallery .gallery-prev, #certificate-gallery .gallery-next { top: 50%; transform: translateY(-50%); font-size: 36px; }
+#certificate-gallery .gallery-prev { left: 0; }
+#certificate-gallery .gallery-next { right: 0; }
+#certificate-gallery .gallery-close { top: 0; right: 0; }
