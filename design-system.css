@@ -36,7 +36,7 @@
 body { font: 400 var(--type-body)/var(--leading-body) var(--body-font); }
 .hero .hero-copy h1, .hero .hero-copy h1:lang(ru), .hero .hero-copy h1:lang(zh-CN) {
   font: 500 var(--type-hero)/var(--leading-hero) var(--heading-font);
-  max-width: min(100%, 650px); letter-spacing: normal; text-wrap: balance; overflow-wrap: normal;
+  max-width: min(100%, 650px); letter-spacing: normal; text-transform: none; text-wrap: balance; overflow-wrap: normal;
 }
 main h2, main .benefits > h2 {
   font: 500 var(--type-section)/var(--leading-section) var(--heading-font);
@@ -106,7 +106,7 @@ main .eyebrow { margin-bottom: 12px; }
   .hero { min-height: clamp(530px, 73svh, 690px); }
   .hero .hero-copy { padding-block: clamp(36px, 5svh, 58px); }
   .hero .hero-copy h1, .hero .hero-copy h1:lang(ru), .hero .hero-copy h1:lang(zh-CN) {
-    max-width: min(100%, 740px);
+    max-width: min(100%, 680px);
   }
   .hero-photo > img { object-position: 56% 65%; }
   .hero-photo::after {

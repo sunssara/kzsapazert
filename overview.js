@@ -1,6 +1,6 @@
 const overview = {
   ru: {
-    headline: 'АККРЕДИТОВАННАЯ СТРОИТЕЛЬНАЯ ИСПЫТАТЕЛЬНАЯ ЛАБОРАТОРИЯ',
+    headline: 'Аккредитованная строительная испытательная лаборатория',
     intro: 'Испытания строительных материалов и контроль качества строительства с выездом на объекты',
     aboutTitle: 'О компании',
     aboutLabel: 'КЗ САПА ЗЕРТХАНАСЫ',
@@ -17,7 +17,7 @@ const overview = {
     process: ['Получаем заявку','Уточняем виды испытаний','Согласуем сроки и условия','Приём образцов / выезд на объект','Проводим испытания','Передаём результаты'],
   },
   kk: {
-    headline:'АККРЕДИТТЕЛГЕН ҚҰРЫЛЫС СЫНАҚ ЗЕРТХАНАСЫ',
+    headline:'Аккредиттелген құрылыс сынақ зертханасы',
     intro:'Құрылыс материалдарын сынау және нысанға шығып, құрылыс сапасын бақылау.',
     aboutTitle:'Компания туралы',aboutLabel:'КЗ САПА ЗЕРТХАНАСЫ',
     problem:'Материалдарды сынаймыз, жұмыс сапасын тексереміз және хаттамалар береміз. Зертхананың құзыреті ГОСТ ISO/IEC 17025-2019 бойынша KZ.T.01.3171 аттестатымен расталған.',
@@ -28,7 +28,7 @@ const overview = {
     processTitle:'Қалай жұмыс істейміз',process:['Өтінімді қабылдаймыз','Сынақ түрлерін анықтаймыз','Мерзімдер мен шарттарды келісеміз','Үлгілерді қабылдаймыз немесе нысанға шығамыз','Сынақ жүргіземіз','Нәтижелерді тапсырамыз'],
   },
   en: {
-    headline:'ACCREDITED CONSTRUCTION TESTING LABORATORY',
+    headline:'Accredited construction testing laboratory',
     intro:'Construction materials testing and on-site construction quality control.',
     aboutTitle:'About the company',aboutLabel:'KZ SAPA ZERTKHANASY',
     problem:'We test materials, check construction quality on site and issue reports. Certificate KZ.T.01.3171 confirms our competence under GOST ISO/IEC 17025-2019.',
