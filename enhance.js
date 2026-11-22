@@ -269,3 +269,55 @@ galleryImage.addEventListener('touchend', event => {
   const distance = event.changedTouches[0].clientX - galleryTouch;
   if (Math.abs(distance) > 50) showCertificatePage(galleryPage + (distance < 0 ? 1 : -1));
 }, {passive:true});
+
+const nativeLanguage = document.querySelector('#language');
+const languagePicker = document.querySelector('.language-picker');
+const languageSummary = languagePicker.querySelector('summary');
+const languageCurrent = languagePicker.querySelector('.language-current');
+const languageOptions = languagePicker.querySelector('.language-options');
+const languageNames = { ru: 'Русский', kk: 'Қазақша', en: 'English', zh: '中文' };
+const languageLabels = { ru: 'Язык', kk: 'Тіл', en: 'Language', zh: '语言' };
+
+for (const option of nativeLanguage.options) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.value = option.value;
+  button.textContent = option.textContent;
+  button.setAttribute('aria-label', languageNames[option.value]);
+  button.addEventListener('click', () => {
+    if (nativeLanguage.value !== option.value) {
+      nativeLanguage.value = option.value;
+      nativeLanguage.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    languagePicker.open = false;
+    languageSummary.focus();
+  });
+  languageOptions.append(button);
+}
+
+function updateLanguagePicker() {
+  const current = nativeLanguage.selectedOptions[0];
+  languageCurrent.textContent = current.textContent;
+  languageSummary.setAttribute('aria-label', languageLabels[current.value] + ': ' + current.textContent);
+  for (const button of languageOptions.children) {
+    button.setAttribute('aria-current', String(button.value === current.value));
+  }
+}
+nativeLanguage.addEventListener('change', updateLanguagePicker);
+updateLanguagePicker();
+nativeLanguage.hidden = true;
+languagePicker.hidden = false;
+
+document.addEventListener('click', event => {
+  if (!languagePicker.contains(event.target)) languagePicker.open = false;
+});
+languagePicker.addEventListener('focusout', event => {
+  if (!languagePicker.contains(event.relatedTarget)) languagePicker.open = false;
+});
+languagePicker.addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || !languagePicker.open) return;
+  event.preventDefault();
+  event.stopPropagation();
+  languagePicker.open = false;
+  languageSummary.focus();
+});

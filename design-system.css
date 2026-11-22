@@ -217,3 +217,70 @@ footer { padding-block: clamp(24px, 3vw, 40px); }
     to { opacity: 1; translate: none; }
   }
 }
+
+.language-picker { position: relative; color: var(--blue); }
+.language-picker summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  min-height: 44px;
+  min-width: 62px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  font: 600 .875rem/1 var(--body-font);
+  transition: border-color var(--motion-ui), background-color var(--motion-ui);
+}
+.language-picker summary::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform var(--motion-ui) var(--motion-ease);
+}
+.language-picker[open] summary { border-color: var(--edge); }
+.language-picker[open] summary::after { transform: translateY(2px) rotate(225deg); }
+.language-picker :is(summary, button):focus-visible {
+  outline: 1px solid var(--blue);
+  outline-offset: 2px;
+}
+.language-options {
+  position: absolute;
+  top: calc(100% + 6px);
+  inset-inline-end: 0;
+  z-index: 1;
+  display: grid;
+  min-width: 88px;
+  gap: 2px;
+  padding: 5px;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-control);
+  background: white;
+  box-shadow: 0 8px 24px #08357618;
+}
+.language-options button {
+  min-height: 44px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  font: 500 .875rem/1 var(--body-font);
+  cursor: pointer;
+  transition: background-color var(--motion-ui);
+}
+.language-options button[aria-current="true"] { background: var(--surface); color: var(--blue); font-weight: 600; }
+@media (hover: hover) {
+  .language-picker summary:hover, .language-options button:hover { background: var(--surface); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .language-picker[open] .language-options { animation: language-open var(--motion-ui) var(--motion-ease) both; }
+  @keyframes language-open {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
