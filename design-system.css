@@ -55,13 +55,13 @@ main .small, .contact-details span, .certificate span, #request-help { font-size
 .project-types { padding-bottom: calc(var(--section-space) / 2); }
 .project-types + .benefits, .work-process + .accreditation { padding-top: calc(var(--section-space) / 2); }
 .benefits .benefit-grid, .object-grid, .work-process .process-grid { margin-top: var(--content-gap); }
-.work-process { padding-block: clamp(28px, 4vw, 52px) clamp(20px, 3vw, 36px); }
+.work-process { padding-block: clamp(26px, 3vw, 44px) clamp(20px, 2.5vw, 32px); }
 .work-process .process-grid {
   --node: 64px;
   --row-gap: 24px;
   --step-duration: .85s;
   width: min(100%, 840px);
-  margin: clamp(20px, 3vw, 32px) auto 0;
+  margin: clamp(20px, 2.5vw, 30px) auto 0;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-auto-rows: 1fr;
   row-gap: var(--row-gap);
@@ -98,7 +98,18 @@ main .small, .contact-details span, .certificate span, #request-help { font-size
   height: 1px;
 }
 .process-track::after { display: none; }
-@media (min-width: 701px) {
+@media (min-width: 1024px) {
+  .work-process .process-grid {
+    --node: 76px;
+    width: 100%;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .work-process .process-grid li { padding-inline: 6px; }
+  .process-grid .process-marker svg { width: 38px; height: 38px; }
+  .process-number { left: calc(50% + 23px); }
+  .work-process .process-label { max-width: 19ch; line-height: 1.45; }
+}
+@media (min-width: 701px) and (max-width: 1023px) {
   .process-track::before { transform: scaleX(0); transform-origin: left; }
   .process-grid li:nth-child(4) { grid-area: 2 / 3; }
   .process-grid li:nth-child(5) { grid-area: 2 / 2; }
