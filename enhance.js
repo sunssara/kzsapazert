@@ -26,8 +26,10 @@ function prepareRequest() {
 function updateEnhancements() {
   const lang = document.querySelector('#language').value;
   const labels = formCopy[lang];
-  requestForm.querySelectorAll('h3, .request-field label, button[type="submit"]').forEach((element, index) => {
-    element.textContent = labels[index];
+  requestForm.setAttribute('aria-label', labels[0]);
+  document.querySelector('#project-dialog').setAttribute('aria-label', labels[0]);
+  requestForm.querySelectorAll('.request-field label, button[type="submit"]').forEach((element, index) => {
+    element.textContent = labels[index + 1];
   });
   const selected = requestServiceSelect.value;
   requestServiceSelect.replaceChildren(

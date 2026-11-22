@@ -471,8 +471,7 @@ header::before {
   background: #ffffff0d;
   border-color: #ffffff23;
 }
-#request-form h3 { margin-bottom: 2px; padding-right: 0; }
-#project-dialog #request-form h3 { padding-right: 38px; }
+#project-dialog #request-form { padding-top: 44px; }
 .request-field { display: grid; gap: 6px; }
 #request-form .request-field :is(input, select, textarea) {
   width: 100%;
