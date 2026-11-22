@@ -218,6 +218,17 @@ footer { padding-block: clamp(24px, 3vw, 40px); }
   }
 }
 
+header { clip-path: none; box-shadow: none; }
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: white;
+  box-shadow: 0 0 0 100vmax white;
+  clip-path: inset(0 -100vmax);
+  pointer-events: none;
+}
 .language-picker { position: relative; color: var(--blue); }
 .language-picker summary {
   display: flex;
