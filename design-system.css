@@ -75,7 +75,10 @@ main .eyebrow { margin-bottom: 12px; }
 .certificate, .field-section, .service-image, #request-form, #project-dialog, #request-success { border-radius: var(--radius-panel); }
 .services-section .section-head > p { margin-top: var(--heading-gap); }
 
-.hero .actions, .accreditation .actions { gap: 12px; }
+.hero .actions { gap: 12px; }
+.accreditation [data-t="scope"] { margin-bottom: 0; }
+.accreditation .actions { margin-top: 32px; gap: 16px; align-items: center; }
+.accreditation .actions .download { display: inline-flex; min-height: 44px; align-items: center; }
 .hero-copy {
   display: grid;
   justify-items: start;
