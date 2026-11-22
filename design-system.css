@@ -9,7 +9,7 @@
   --grid-gap: clamp(24px, 4vw, 56px);
   --content-gap: clamp(20px, 2.5vw, 32px);
   --heading-gap: 16px;
-  --type-hero: clamp(2.125rem, 3.7vw, 3.625rem);
+  --type-hero: clamp(2rem, 4.7vw, 3.5rem);
   --type-section: clamp(2rem, 4vw, 3.5rem);
   --type-card: clamp(1.125rem, 1.65vw, 1.375rem);
   --radius-control: 10px;
@@ -24,7 +24,7 @@ html[lang="zh-CN"] { --heading-font: "Noto Sans SC", var(--body-font); }
 body { font-family: var(--body-font); }
 .hero .hero-copy h1, .hero .hero-copy h1:lang(ru), .hero .hero-copy h1:lang(zh-CN) {
   font: 500 var(--type-hero)/1.17 var(--heading-font);
-  max-width: 24ch; text-wrap: balance; overflow-wrap: normal;
+  max-width: min(100%, 650px); text-wrap: balance; overflow-wrap: normal;
 }
 main h2, main .benefits > h2 {
   font: 500 var(--type-section)/1.16 var(--heading-font);
@@ -39,17 +39,58 @@ main h3, .service-item h3, .benefits .benefit-grid article h3,
 main p, .benefit-grid article p, .service-item p { font: 400 1rem/1.65 var(--body-font); }
 main .service-image p { font-size: .875rem; line-height: 1.5; }
 main .photo-label p { font: 500 var(--type-card)/1.36 var(--heading-font); }
-main .large, .hero .lead { font-size: clamp(1.0625rem, 1.35vw, 1.1875rem); line-height: 1.55; }
+main .large { font-size: clamp(1.0625rem, 1.35vw, 1.1875rem); line-height: 1.55; }
 main .eyebrow { margin-bottom: 12px; font: 600 .8125rem/1.5 var(--body-font); letter-spacing: .12em; }
 main .small, .contact-details span, .certificate span, #request-help { font-size: .875rem; line-height: 1.5; }
 #site-nav a { font-weight: 500; }
 .button, select, .menu-toggle, #request-form input, #request-form textarea, .project-close { border-radius: var(--radius-control); }
 .button { min-height: 44px; padding: 12px 19px; text-align: center; line-height: 1.35; }
 .certificate, .field-section, .service-image, #request-form, #project-dialog, #request-success { border-radius: var(--radius-panel); }
-.hero .lead, .services-section .section-head > p { margin-top: var(--heading-gap); }
-.hero .lead { margin-bottom: var(--content-gap); }
+.services-section .section-head > p { margin-top: var(--heading-gap); }
+
 .hero .actions, .accreditation .actions { gap: 12px; }
-.hero .hero-proof { margin-top: 24px; }
+.hero-copy {
+  display: grid;
+  justify-items: start;
+  gap: clamp(16px, 1.6vw, 22px);
+  padding-block: clamp(36px, 5vw, 72px);
+}
+.hero .eyebrow, .hero .lead { margin: 0; }
+.hero .eyebrow { font-weight: 500; }
+.hero .lead { max-width: 555px; font: 400 clamp(1rem, 1.4vw, 1.125rem)/1.55 var(--body-font); }
+.hero .actions .button {
+  min-height: 50px;
+  padding: 13px 22px;
+  font: 500 .9375rem/1.35 var(--body-font);
+  transition: background-color var(--motion-ui), color var(--motion-ui), border-color var(--motion-ui);
+}
+.hero .overview-quote { background: white; color: var(--blue); border: 1px solid white; }
+.hero .overview-quote:hover { background: #edf4ff; color: var(--blue); }
+.hero .hero-services { background: transparent; color: white; border: 1px solid #fffc; }
+.hero .hero-services:hover { background: #ffffff20; color: white; border-color: white; }
+.hero .hero-proof {
+  margin: 0;
+  padding-top: 14px;
+  max-width: min(100%, 510px);
+}
+.hero .hero-proof strong { font: 500 .9375rem/1.4 var(--body-font); }
+.hero .hero-proof span { font: 500 .875rem/1.5 var(--body-font); }
+.hero-photo::after {
+  background: linear-gradient(90deg,#062d66fa 0%,#062d66ef 28%,#062d66bf 49%,#08357625 76%,#08357608 100%),
+    linear-gradient(0deg,#0835764d,transparent 44%);
+}
+@media (min-width: 1024px) {
+  :root { --type-hero: clamp(3rem, 4vw, 3.5rem); }
+  .hero { min-height: calc(100svh - var(--header-height)); }
+  .hero .hero-copy h1 { max-width: min(61%, 650px); }
+}
+@media (max-width: 760px) {
+  .hero-copy { padding-block: clamp(126px, 42vw, 238px) 28px; }
+  .hero-photo > img { object-position: 57% 54%; }
+  .hero-photo::after {
+    background: linear-gradient(0deg,#062d66 0%,#062d66f7 35%,#062d66d9 72%,#08357618 100%);
+  }
+}
 .two-col, .services-section .service-layout, .accreditation { gap: var(--grid-gap); }
 .intro-section, .services-section, .project-types, .benefits, .work-process, .accreditation, .contact-section { padding-block: var(--section-space); }
 .project-types { padding-bottom: calc(var(--section-space) / 2); }
@@ -99,15 +140,37 @@ main .small, .contact-details span, .certificate span, #request-help { font-size
 }
 .process-track::after { display: none; }
 @media (min-width: 1024px) {
+  .work-process { padding-bottom: clamp(48px, 4vw, 60px); }
+  .work-process + .accreditation { padding-top: clamp(48px, 4vw, 60px); }
   .work-process .process-grid {
     --node: 76px;
     width: 100%;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    margin-top: clamp(48px, 3.8vw, 56px);
+    grid-template-columns: repeat(5, minmax(0, 1fr)) var(--node);
   }
-  .work-process .process-grid li { padding-inline: 6px; }
+  .work-process .process-grid li { padding: 0; }
+  .process-grid .process-marker { margin-inline: 0; }
   .process-grid .process-marker svg { width: 38px; height: 38px; }
-  .process-number { left: calc(50% + 23px); }
-  .work-process .process-label { max-width: 19ch; line-height: 1.45; }
+  .process-number { left: calc(var(--node) - 15px); }
+  .work-process .process-label {
+    width: min(19ch, calc(100% - 10px));
+    margin: 18px 0 0;
+    position: relative;
+    left: calc(var(--node) / 2);
+    translate: -50% 0;
+  }
+  .work-process .process-grid li:first-child .process-label {
+    left: 0;
+    translate: none;
+    text-align: left;
+  }
+  .work-process .process-grid li:last-child .process-label {
+    width: min(19ch, calc((min(1200px, 100vw - 2 * var(--gutter)) - var(--node)) / 5 - 10px));
+    left: var(--node);
+    translate: -100% 0;
+    text-align: right;
+  }
+  .process-track { left: calc(var(--node) / 2); }
 }
 @media (min-width: 701px) and (max-width: 1023px) {
   .process-track::before { transform: scaleX(0); transform-origin: left; }
@@ -229,7 +292,7 @@ footer { padding-block: clamp(24px, 3vw, 40px); }
     --section-space: clamp(40px, 8vw, 54px);
     --grid-gap: 22px;
     --content-gap: 20px;
-    --type-hero: clamp(1.625rem, 6.7vw, 2.625rem);
+    --type-hero: clamp(1.625rem, 7vw, 2.75rem);
     --type-section: clamp(1.875rem, 6.8vw, 2.5rem);
     --type-card: 1.125rem;
   }
