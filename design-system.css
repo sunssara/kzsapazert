@@ -5,10 +5,13 @@
   --surface: #f2f4f7;
   --edge: #ced9e5;
   --gutter: clamp(20px, 5vw, 72px);
-  --section-space: clamp(56px, 6vw, 96px);
+  --section-space: 96px;
+  --section-content-gap: 48px;
+  --description-content-gap: 40px;
+  --space-unit: 8px;
   --grid-gap: clamp(24px, 4vw, 56px);
   --content-gap: clamp(20px, 2.5vw, 32px);
-  --heading-gap: 16px;
+  --heading-gap: calc(2 * var(--space-unit));
   --type-hero: 3.5rem;
   --type-section: 2.75rem;
   --type-card: 1.375rem;
@@ -23,12 +26,10 @@
   --leading-body: 1.6;
   --leading-secondary: 1.5;
   --leading-caption: 1.4;
-  --space-section-feature: clamp(96px, 8vw, 120px);
-  --space-feature-heading: clamp(48px, 3.9vw, 56px);
   --radius-control: 10px;
   --radius-panel: 16px;
   --card-padding: 24px;
-  --card-gap: 12px;
+  --card-gap: calc(2 * var(--space-unit));
   --motion-in: 460ms;
   --motion-ui: 240ms;
   --motion-ease: cubic-bezier(.22, .65, .28, 1);
@@ -73,7 +74,14 @@ main .eyebrow { margin-bottom: 12px; }
 .button { min-height: 44px; padding: 12px 19px; text-align: center; font: 500 var(--type-button)/var(--leading-caption) var(--body-font); }
 .contact-details .contact-cta { font: 500 var(--type-button)/var(--leading-caption) var(--body-font); }
 .certificate, .field-section, .service-image, #request-form, #project-dialog, #request-success { border-radius: var(--radius-panel); }
-.services-section .section-head > p { margin-top: var(--heading-gap); }
+.intro-section .two-col { display: block; }
+.intro-section .two-col > div { margin-top: var(--heading-gap); }
+.intro-section .two-col p { margin-block: 0; }
+.services-section .section-head { margin-block: 0 var(--description-content-gap); }
+.services-section .section-head > p { margin-block: var(--heading-gap) 0; }
+.accreditation h2 { margin-bottom: var(--heading-gap); }
+.accreditation [data-t="accText"] { margin-block: 0; }
+.accreditation dl { margin-block: var(--description-content-gap) calc(3 * var(--space-unit)); }
 
 .hero .actions { gap: 12px; }
 .accreditation [data-t="scope"] { margin-bottom: 0; }
@@ -126,18 +134,15 @@ main .eyebrow { margin-bottom: 12px; }
   }
 }
 .two-col, .services-section .service-layout, .accreditation { gap: var(--grid-gap); }
-.intro-section, .services-section, .project-types, .benefits, .work-process, .accreditation, .contact-section { padding-block: var(--section-space); }
-.project-types { padding-bottom: calc(var(--section-space) / 2); }
-.project-types + .benefits, .work-process + .accreditation { padding-top: calc(var(--section-space) / 2); }
-.benefits .benefit-grid, .object-grid, .work-process .process-grid { margin-top: var(--content-gap); }
+.intro-section, .services-section, .project-types, .benefits, .work-process, .accreditation, .contact-section, .mobile-lab-section { padding-block: var(--section-space); }
+.benefits .benefit-grid, .object-grid { margin-block: var(--section-content-gap) 0; }
 .services-section { background-color: var(--surface); }
-.work-process { padding-block: clamp(26px, 3vw, 44px) clamp(20px, 2.5vw, 32px); }
 .work-process .process-grid {
   --node: 64px;
   --row-gap: 24px;
   --step-duration: .85s;
   width: min(100%, 840px);
-  margin: var(--space-feature-heading) auto 0;
+  margin: var(--section-content-gap) auto 0;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-auto-rows: 1fr;
   row-gap: var(--row-gap);
@@ -175,8 +180,7 @@ main .eyebrow { margin-bottom: 12px; }
 }
 .process-track::after { display: none; }
 @media (min-width: 1024px) {
-  .work-process { container-type: inline-size; padding-block: var(--space-section-feature); }
-  .work-process + .accreditation { padding-top: 0; }
+  .work-process { container-type: inline-size; }
   .work-process .process-grid {
     --node: 76px;
     width: 100%;
@@ -316,9 +320,9 @@ main .eyebrow { margin-bottom: 12px; }
   max-width: 65ch;
   margin: 0;
 }
-.field-section > div > .button { margin: 0; }
+.field-section > div > .button { margin: calc(var(--description-content-gap) - var(--heading-gap)) 0 0; }
 @media (max-width: 760px) {
-  .field-section > div { gap: 16px; padding: var(--card-padding); }
+  .field-section > div { padding: var(--card-padding); }
 }
 .service-image p { padding: var(--card-padding); }
 .accreditation { align-items: center; }
@@ -338,9 +342,9 @@ main .eyebrow { margin-bottom: 12px; }
   .contact-section .two-col > :first-child { align-self: center; }
 }
 .contact-section .contact-details {
-  --contact-gap: 8px;
+  --contact-gap: var(--space-unit);
   gap: var(--contact-gap);
-  margin-top: var(--content-gap);
+  margin-top: var(--description-content-gap);
   padding-inline: 0;
   text-align: left;
 }
@@ -349,7 +353,7 @@ main .eyebrow { margin-bottom: 12px; }
 .contact-section .contact-details .contact-address { margin-top: var(--contact-gap); }
 footer { padding-block: clamp(24px, 3vw, 40px); }
 @media (min-width: 761px) and (max-width: 1023px) {
-  :root { --section-space: 56px; --grid-gap: 26px; --type-hero: 2.75rem; --type-section: 2.25rem; --type-card: 1.25rem; --type-body: 1rem; }
+  :root { --section-space: 80px; --grid-gap: 26px; --type-hero: 2.75rem; --type-section: 2.25rem; --type-card: 1.25rem; --type-body: 1rem; }
   .hero .hero-copy h1, .hero .hero-copy h1:lang(ru), .hero .hero-copy h1:lang(zh-CN) { max-width: min(100%, 560px); }
   .accreditation { grid-template-columns: minmax(0, 1fr) minmax(0, .85fr); }
 }
@@ -357,7 +361,9 @@ footer { padding-block: clamp(24px, 3vw, 40px); }
   :root {
     --gutter: clamp(16px, 5vw, 28px);
     --card-padding: 20px;
-    --section-space: clamp(40px, 8vw, 54px);
+    --section-space: clamp(56px, 10vw, 64px);
+    --section-content-gap: 32px;
+    --description-content-gap: 32px;
     --grid-gap: 22px;
     --content-gap: 20px;
     --type-hero: clamp(2.125rem, 5vw, 2.25rem);
@@ -469,12 +475,12 @@ header::before {
   }
 }
 #request-form {
-  gap: 14px;
+  gap: calc(2 * var(--space-unit));
   background: #ffffff0d;
   border-color: #ffffff23;
 }
 #project-dialog #request-form { padding-top: 44px; }
-.request-field { display: grid; gap: 6px; }
+.request-field { display: grid; gap: var(--space-unit); }
 #request-form .request-field :is(input, select, textarea) {
   width: 100%;
   min-height: 50px;
