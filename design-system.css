@@ -46,7 +46,7 @@ main .small, .contact-details span, .certificate span, #request-help { font-size
 .button, select, .menu-toggle, #request-form input, #request-form textarea, .project-close { border-radius: var(--radius-control); }
 .button { min-height: 44px; padding: 12px 19px; text-align: center; line-height: 1.35; }
 .certificate, .field-section, .service-image, #request-form, #project-dialog, #request-success { border-radius: var(--radius-panel); }
-.hero .lead, .field-section > div > h2 + p, .services-section .section-head > p { margin-top: var(--heading-gap); }
+.hero .lead, .services-section .section-head > p { margin-top: var(--heading-gap); }
 .hero .lead { margin-bottom: var(--content-gap); }
 .hero .actions, .accreditation .actions { gap: 12px; }
 .hero .hero-proof { margin-top: 24px; }
@@ -193,6 +193,27 @@ main .small, .contact-details span, .certificate span, #request-help { font-size
 .project-types .object-grid .object-visual { grid-column: 1; grid-row: 1; }
 .project-types .object-grid .object-index { grid-column: 2; grid-row: 1; }
 .project-types .object-grid h3 { grid-column: 1 / -1; grid-row: 2; }
+.field-section > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  padding: clamp(24px, 3.5vw, 48px);
+}
+.field-section h2 {
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  line-height: 1.16;
+  text-wrap: balance;
+}
+.field-section > div > p:not(.eyebrow) {
+  max-width: 65ch;
+  margin: 0;
+  line-height: 1.6;
+}
+.field-section > div > .button { margin: 0; }
+@media (max-width: 760px) {
+  .field-section > div { gap: 16px; padding: var(--card-padding); }
+}
 .service-image p { padding: var(--card-padding); }
 .contact-section .contact-details { margin-top: var(--content-gap); }
 footer { padding-block: clamp(24px, 3vw, 40px); }
