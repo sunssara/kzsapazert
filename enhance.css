@@ -592,3 +592,4 @@ body:has(#certificate-gallery[open]) { overflow: hidden; }
 @media (max-width: 760px) {
   .services-section .service-layout { grid-template-columns: minmax(0, 1fr); }
 }
+.hero .hero-copy h1:lang(ru) { max-width: 19ch; font-size: clamp(30px, 4.4vw, 64px); overflow-wrap: anywhere; } @media (max-width: 760px) { .hero .hero-copy h1:lang(ru) { font-size: clamp(28px, 7vw, 48px); } }
