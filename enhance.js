@@ -158,7 +158,7 @@ const projectDialog = document.querySelector('#project-dialog');
 const projectFormHome = requestForm.parentElement;
 const projectClose = projectDialog.querySelector('.project-close');
 let projectTrigger;
-document.querySelectorAll(':is(a[data-t="cta"], a[data-t="writeUs"], a[data-t="quote"])[href="#request-form"]').forEach(trigger => {
+document.querySelectorAll(':is(a[data-t="cta"], a[data-t="writeUs"])[href="#request-form"]').forEach(trigger => {
   trigger.setAttribute('aria-haspopup', 'dialog');
   trigger.addEventListener('click', event => {
     if (!projectDialog.showModal) return;
