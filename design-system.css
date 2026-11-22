@@ -318,6 +318,7 @@ main .eyebrow { margin-bottom: 12px; }
   .field-section > div { gap: 16px; padding: var(--card-padding); }
 }
 .service-image p { padding: var(--card-padding); }
+.contact-section h2 + p { margin-block: var(--heading-gap) 0; }
 .contact-section .contact-details { margin-top: var(--content-gap); }
 footer { padding-block: clamp(24px, 3vw, 40px); }
 @media (min-width: 761px) and (max-width: 1023px) {
