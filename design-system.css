@@ -103,7 +103,7 @@ main .eyebrow { margin-bottom: 12px; }
     linear-gradient(0deg,#0835764d,transparent 44%);
 }
 @media (min-width: 1024px) {
-  .hero { min-height: clamp(530px, 73svh, 690px); }
+  .hero { min-height: calc(100svh - var(--header-height)); align-items: center; }
   .hero .hero-copy { padding-block: clamp(36px, 5svh, 58px); }
   .hero .hero-copy h1, .hero .hero-copy h1:lang(ru), .hero .hero-copy h1:lang(zh-CN) {
     max-width: min(100%, 680px);
