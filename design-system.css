@@ -53,43 +53,100 @@ main .small, .contact-details span, .certificate span, #request-help { font-size
 .two-col, .services-section .service-layout, .accreditation { gap: var(--grid-gap); }
 .intro-section, .services-section, .project-types, .benefits, .work-process, .accreditation, .contact-section { padding-block: var(--section-space); }
 .project-types { padding-bottom: calc(var(--section-space) / 2); }
-.work-process { padding-bottom: clamp(24px, 3vw, 40px); }
 .project-types + .benefits, .work-process + .accreditation { padding-top: calc(var(--section-space) / 2); }
 .benefits .benefit-grid, .object-grid, .work-process .process-grid { margin-top: var(--content-gap); }
+.work-process { padding-block: clamp(28px, 4vw, 52px) clamp(20px, 3vw, 36px); }
 .work-process .process-grid {
-  --process-gap: clamp(12px, 1.3vw, 18px);
-  --track-inset: 7px;
-  margin-top: clamp(22px, 3vw, 36px);
+  --node: 64px;
+  --row-gap: 24px;
+  --step-duration: .85s;
+  width: min(100%, 840px);
+  margin: clamp(20px, 3vw, 32px) auto 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  row-gap: var(--row-gap);
 }
-.work-process .process-grid li { padding: 0 8px; }
+.work-process .process-grid li { display: block; padding: 0 12px; }
 .process-marker { margin-inline: auto; }
+.process-grid .process-marker svg { width: 32px; height: 32px; }
+.process-number {
+  position: absolute;
+  left: calc(50% + 17px);
+  top: -4px;
+  z-index: 2;
+  min-width: 25px;
+  padding: 2px 4px;
+  border: 1px solid var(--edge);
+  border-radius: 6px;
+  background: white;
+  color: var(--blue);
+  text-align: center;
+  font: 600 .75rem/1.3 var(--body-font);
+  font-variant-numeric: tabular-nums;
+}
 .work-process .process-label {
-  inline-size: min(100%, 22ch);
-  margin: var(--process-gap) auto 0;
+  max-width: 24ch;
+  margin: 12px auto 0;
   color: var(--ink);
   font: 500 1rem/1.45 var(--body-font);
   text-align: center;
   text-wrap: balance;
 }
 .process-track {
-  left: calc(50% + var(--node) / 2 + var(--track-inset));
-  right: calc(var(--node) / 2 + var(--track-inset) - 50%);
-  top: calc(var(--node) / 2);
+  inset: calc(var(--node) / 2) auto auto 50%;
+  width: 100%;
+  height: 1px;
 }
-@media (max-width: 900px) {
-  .work-process .process-grid { grid-auto-rows: 1fr; }
+.process-track::after { display: none; }
+@media (min-width: 701px) {
+  .process-track::before { transform: scaleX(0); transform-origin: left; }
+  .process-grid li:nth-child(4) { grid-area: 2 / 3; }
+  .process-grid li:nth-child(5) { grid-area: 2 / 2; }
+  .process-grid li:nth-child(6) { grid-area: 2 / 1; }
+  .process-grid li:nth-child(n+4) .process-track { right: 50%; left: auto; }
+  .process-grid li:nth-child(n+4) .process-track::before { transform-origin: right; }
+  .process-grid li:nth-child(3) .process-track {
+    width: 36%;
+    height: calc(100% + var(--row-gap));
+    border: 1px solid var(--track);
+    border-left: 0;
+    border-radius: 0 22px 22px 0;
+    background: none;
+  }
+  .process-grid li:nth-child(3) .process-track::before {
+    inset: -1px;
+    border: inherit;
+    border-color: var(--blue);
+    border-left: 0;
+    border-radius: inherit;
+    background: none;
+    transform: none;
+    clip-path: inset(0 0 100% 0);
+  }
+  .process-start li:nth-child(3) .process-track::before { animation-name: process-turn; }
+  .process-start li:is(:nth-child(1), :nth-child(2), :nth-child(4), :nth-child(5)) .process-track::before { animation-name: process-horizontal; }
+}
+@keyframes process-turn {
+  0% { clip-path: inset(0 0 100% 0); opacity: 0; }
+  16%, 78% { clip-path: inset(0); opacity: .8; }
+  96%, 100% { clip-path: inset(0); opacity: 0; }
+}
+@media (max-width: 700px) {
+  .work-process .process-grid { --node: 54px; --row-gap: 12px; grid-template-columns: minmax(0, 1fr); max-width: 380px; }
   .work-process .process-grid li {
+    display: grid;
     grid-template-columns: var(--node) minmax(0, 1fr);
     align-items: center;
-    gap: var(--process-gap);
-    padding: 8px 0;
+    gap: 16px;
+    padding: 0;
   }
-  .work-process .process-label { inline-size: min(100%, 24ch); margin: 0 auto; }
+  .process-grid .process-marker svg { width: 28px; height: 28px; }
+  .process-number { left: calc(var(--node) - 15px); }
+  .work-process .process-label { max-width: none; margin: 0; text-align: left; }
   .process-track {
-    left: calc(var(--node) / 2);
-    right: auto;
-    top: calc(50% + var(--node) / 2);
-    bottom: calc(var(--node) / 2 - 50%);
+    inset: 50% auto auto calc(var(--node) / 2);
+    width: 1px;
+    height: calc(100% + var(--row-gap));
   }
 }
 .service-item,
