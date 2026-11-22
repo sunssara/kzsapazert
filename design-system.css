@@ -70,6 +70,7 @@ main .eyebrow { margin-bottom: 12px; }
 .project-types .object-index { font-family: var(--body-font); }
 .button, select, .menu-toggle, #request-form input, #request-form textarea, .project-close { border-radius: var(--radius-control); }
 .button { min-height: 44px; padding: 12px 19px; text-align: center; font: 500 var(--type-button)/var(--leading-caption) var(--body-font); }
+.contact-details .contact-cta { font: 500 var(--type-button)/var(--leading-caption) var(--body-font); }
 .certificate, .field-section, .service-image, #request-form, #project-dialog, #request-success { border-radius: var(--radius-panel); }
 .services-section .section-head > p { margin-top: var(--heading-gap); }
 
@@ -83,8 +84,8 @@ main .eyebrow { margin-bottom: 12px; }
 .hero .eyebrow, .hero .lead { margin: 0; }
 .hero .lead { max-width: 555px; }
 .hero .actions .button {
-  min-height: 50px;
-  padding: 13px 22px;
+  min-height: 52px;
+  padding: 14px 24px;
   transition: background-color var(--motion-ui), color var(--motion-ui), border-color var(--motion-ui);
 }
 .hero .overview-quote { background: white; color: var(--blue); border: 1px solid white; }
@@ -96,14 +97,22 @@ main .eyebrow { margin-bottom: 12px; }
   padding-top: 14px;
   max-width: min(100%, 510px);
 }
-.hero .hero-proof strong { font: 500 var(--type-secondary)/var(--leading-caption) var(--body-font); }
+.hero .hero-proof strong { font: 500 var(--type-body)/var(--leading-caption) var(--body-font); }
 .hero-photo::after {
   background: linear-gradient(90deg,#062d66fa 0%,#062d66ef 28%,#062d66bf 49%,#08357625 76%,#08357608 100%),
     linear-gradient(0deg,#0835764d,transparent 44%);
 }
 @media (min-width: 1024px) {
-  .hero { min-height: calc(100svh - var(--header-height)); }
-  .hero .hero-copy h1 { max-width: min(61%, 650px); }
+  .hero { min-height: clamp(530px, 73svh, 690px); }
+  .hero .hero-copy { padding-block: clamp(36px, 5svh, 58px); }
+  .hero .hero-copy h1, .hero .hero-copy h1:lang(ru), .hero .hero-copy h1:lang(zh-CN) {
+    max-width: min(100%, 700px);
+  }
+  .hero-photo > img { object-position: 56% 65%; }
+  .hero-photo::after {
+    background: linear-gradient(90deg,#062d66f7 0%,#062d66e8 max(25%,calc((100% - 1200px) / 2 + 280px)),#062d66c4 max(52%,calc((100% - 1200px) / 2 + 640px)),#0835762b 87%,#08357609 100%),
+      linear-gradient(0deg,#08357644,transparent 44%);
+  }
 }
 @media (max-width: 760px) {
   .hero-copy { padding-block: clamp(126px, 42vw, 238px) 28px; }
