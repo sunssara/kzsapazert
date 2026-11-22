@@ -24,7 +24,7 @@
   --leading-secondary: 1.5;
   --leading-caption: 1.4;
   --space-section-feature: clamp(96px, 8vw, 120px);
-  --space-feature-heading: clamp(48px, 3.8vw, 56px);
+  --space-feature-heading: clamp(48px, 3.9vw, 56px);
   --radius-control: 10px;
   --radius-panel: 16px;
   --card-padding: 24px;
@@ -132,7 +132,7 @@ main .eyebrow { margin-bottom: 12px; }
   --row-gap: 24px;
   --step-duration: .85s;
   width: min(100%, 840px);
-  margin: clamp(20px, 2.5vw, 30px) auto 0;
+  margin: var(--space-feature-heading) auto 0;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-auto-rows: 1fr;
   row-gap: var(--row-gap);
@@ -176,7 +176,6 @@ main .eyebrow { margin-bottom: 12px; }
     --node: 76px;
     width: 100%;
     --label-width: min(20ch, calc(((100cqw - var(--node)) / 5 + var(--node) / 2 - 12px) / 1.5));
-    margin-top: var(--space-feature-heading);
     grid-template-columns: repeat(5, minmax(0, 1fr)) var(--node);
   }
   .work-process .process-grid li { padding: 0; }
@@ -238,7 +237,7 @@ main .eyebrow { margin-bottom: 12px; }
   96%, 100% { clip-path: inset(0); opacity: 0; }
 }
 @media (max-width: 700px) {
-  .work-process .process-grid { --node: 54px; --row-gap: 12px; grid-template-columns: minmax(0, 1fr); max-width: 380px; }
+  .work-process .process-grid { --node: 54px; --row-gap: 12px; grid-template-columns: minmax(0, 1fr); max-width: 380px; margin-inline: 0; }
   .work-process .process-grid li {
     display: grid;
     grid-template-columns: var(--node) minmax(0, 1fr);
