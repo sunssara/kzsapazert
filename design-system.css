@@ -127,16 +127,7 @@ main .eyebrow { margin-bottom: 12px; }
 .project-types + .benefits, .work-process + .accreditation { padding-top: calc(var(--section-space) / 2); }
 .benefits .benefit-grid, .object-grid, .work-process .process-grid { margin-top: var(--content-gap); }
 .services-section { background-color: var(--surface); }
-.work-process { position: relative; isolation: isolate; padding-block: clamp(26px, 3vw, 44px) clamp(20px, 2.5vw, 32px); }
-.work-process::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: var(--surface);
-  box-shadow: 0 0 0 100vmax var(--surface);
-  clip-path: inset(0 -100vmax);
-}
+.work-process { padding-block: clamp(26px, 3vw, 44px) clamp(20px, 2.5vw, 32px); }
 .work-process .process-grid {
   --node: 64px;
   --row-gap: 24px;
