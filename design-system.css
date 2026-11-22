@@ -309,7 +309,7 @@ main .eyebrow { margin-bottom: 12px; }
 footer { padding-block: clamp(24px, 3vw, 40px); }
 @media (min-width: 761px) and (max-width: 1023px) {
   :root { --section-space: 56px; --grid-gap: 26px; --type-hero: 2.75rem; --type-section: 2.25rem; --type-card: 1.25rem; --type-body: 1rem; }
-  .hero .hero-copy h1, .hero .hero-copy h1:lang(ru), .hero .hero-copy h1:lang(zh-CN) { max-width: 21ch; }
+  .hero .hero-copy h1, .hero .hero-copy h1:lang(ru), .hero .hero-copy h1:lang(zh-CN) { max-width: min(100%, 560px); }
   .accreditation { grid-template-columns: minmax(0, 1fr) minmax(0, .85fr); }
 }
 @media (max-width: 760px) {
