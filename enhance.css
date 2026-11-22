@@ -592,3 +592,12 @@ body:has(#certificate-gallery[open]) { overflow: hidden; }
 @media (max-width: 760px) {
   .services-section .service-layout { grid-template-columns: minmax(0, 1fr); }
 }
+
+.hero .hero-copy h1 { max-width: 19ch; overflow-wrap: anywhere; }
+.hero .hero-copy h1:lang(ru) { max-width: 19ch; font-size: clamp(36px, 4.4vw, 64px); }
+.hero .hero-quote { border: 1px solid #ffffffb3; color: white; background: #08357666; text-align: center; }
+.hero .hero-quote:hover { background: #083576; }
+.hero .actions .button::before { content: none; }
+@media (max-width: 760px) {
+  .hero .hero-copy h1:lang(ru) { font-size: clamp(30px, 7vw, 48px); }
+}
