@@ -768,3 +768,19 @@ main h3, .service-item h3, .benefits .benefit-copy h3, .benefits .benefit-grid a
   }
   .process-start li:hover .process-marker { animation-play-state: paused; }
 }
+
+.hero .hero-copy h1, .hero .hero-copy h1:lang(ru) { max-width: 24ch; font-size: clamp(32px,3.65vw,56px); line-height: 1.2; }
+.hero .lead { margin: 18px 0 24px; max-width: 500px; }
+.hero .actions { gap: 12px; }
+.hero .hero-proof { margin-top: 24px; padding-top: 14px; gap: 10px; max-width: 450px; }
+.hero .hero-proof .check { width: 30px; height: 30px; font-size: 17px; line-height: 28px; }
+.hero .hero-proof strong { font-size: .8125rem; }
+.hero-photo::after {
+  background: linear-gradient(90deg,#083576 0%,#083576f5 22%,#083576bd 42%,#08357630 72%,#08357616 100%),
+    linear-gradient(0deg,#08357644,transparent 48%);
+}
+@media (max-width: 760px) {
+  .hero .hero-copy h1, .hero .hero-copy h1:lang(ru) { font-size: clamp(25px,6.2vw,42px); }
+  .hero-photo::after { background: linear-gradient(0deg,#083576 0%,#083576ed 43%,#08357670 75%,#08357620 100%); }
+  .hero .hero-proof { margin-top: 20px; }
+}

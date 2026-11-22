@@ -1,7 +1,7 @@
 const overview = {
   ru: {
     headline: 'АККРЕДИТОВАННАЯ СТРОИТЕЛЬНАЯ ИСПЫТАТЕЛЬНАЯ ЛАБОРАТОРИЯ',
-    intro: 'Испытания строительных материалов и контроль качества строительства. Выездная лаборатория для работы непосредственно на строительных объектах.',
+    intro: 'Испытания строительных материалов и контроль качества строительства с выездом на объекты',
     aboutTitle: 'О компании',
     aboutLabel: 'КЗ САПА ЗЕРТХАНАСЫ',
     problem: 'Испытываем материалы, проверяем качество работ на объектах и выдаём протоколы. Компетентность лаборатории подтверждена аттестатом KZ.T.01.3171 по ГОСТ ISO/IEC 17025-2019.',
@@ -18,7 +18,7 @@ const overview = {
   },
   kk: {
     headline:'АККРЕДИТТЕЛГЕН ҚҰРЫЛЫС СЫНАҚ ЗЕРТХАНАСЫ',
-    intro:'Құрылыс материалдарын сынау және құрылыс сапасын бақылау. Жылжымалы зертхана құрылыс нысандарында тікелей жұмыс істейді.',
+    intro:'Құрылыс материалдарын сынау және нысанға шығып, құрылыс сапасын бақылау.',
     aboutTitle:'Компания туралы',aboutLabel:'КЗ САПА ЗЕРТХАНАСЫ',
     problem:'Материалдарды сынаймыз, жұмыс сапасын тексереміз және хаттамалар береміз. Зертхананың құзыреті ГОСТ ISO/IEC 17025-2019 бойынша KZ.T.01.3171 аттестатымен расталған.',
     mobileTitle:'Жылжымалы зертхана', mobileText:'Құрылыс алаңына шығып, үлгі аламыз және көзделген сынақтарды сол жерде өткіземіз. Сынақты нысанда өткізу мүмкін болса, тапсырыс беруші үлгілерді өзі жеткізбейді.',
@@ -29,7 +29,7 @@ const overview = {
   },
   en: {
     headline:'ACCREDITED CONSTRUCTION TESTING LABORATORY',
-    intro:'Construction materials testing and quality control. Our mobile laboratory conducts testing directly on construction sites.',
+    intro:'Construction materials testing and on-site construction quality control.',
     aboutTitle:'About the company',aboutLabel:'KZ SAPA ZERTKHANASY',
     problem:'We test materials, check construction quality on site and issue reports. Certificate KZ.T.01.3171 confirms our competence under GOST ISO/IEC 17025-2019.',
     mobileTitle:'Mobile laboratory',mobileText:'We visit construction sites to collect samples and carry out applicable tests on location. Where tests can be performed on site, customers do not need to arrange sample delivery.',
@@ -39,7 +39,7 @@ const overview = {
     processTitle:'How we work',process:['Receive your inquiry','Identify the tests needed','Agree timing and terms','Receive samples or visit the site','Carry out testing','Deliver the results'],
   },
   zh: {
-    headline:'经认可的建筑工程检测实验室',intro:'提供建筑材料检测和施工质量控制。移动实验室可直接在施工现场开展检测。',
+    headline:'经认可的建筑工程检测实验室',intro:'提供建筑材料检测及施工现场质量控制。',
     aboutTitle:'关于公司',aboutLabel:'KZ SAPA ZERTKHANASY',
     problem:'我们开展材料检测和现场施工质量检查，并出具报告。认可证书 KZ.T.01.3171 确认本实验室符合 GOST ISO/IEC 17025-2019 的能力要求。',
     mobileTitle:'移动实验室',mobileText:'我们前往施工现场取样并开展适用的检测。能够在现场完成的检测，客户无需自行安排送样。',
@@ -64,7 +64,6 @@ for (const lang of Object.keys(overview)) Object.assign(content[lang], overview[
 
 function renderOverview() {
   const data = overview[document.querySelector('#language').value];
-  document.querySelector('.hero-directions').innerHTML = data.directions.map(label => '<li>' + label + '</li>').join('');
   document.querySelector('.object-grid').innerHTML = data.objects.map((label, i) => '<article>' + ('<div class="object-visual">' + overviewIcon(i) + '</div>') + '<h3>' + label + '</h3></article>').join('');
   document.querySelector('#benefits').innerHTML = data.strengths.map(([title, description], i) => '<article>' + overviewIcon([4,1,2,3,0,5][i]) + '<div><h3>' + title + '</h3><p>' + description + '</p></div></article>').join('');
   document.querySelector('.process-grid').innerHTML = data.process.map((label, i) => '<li style="--step:' + i + '"><span class="process-marker">' + overviewIcon([5,0,3,1,2,4][i]) + '</span><span class="process-track" aria-hidden="true"></span><h3>' + label + '</h3></li>').join('');
