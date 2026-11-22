@@ -70,57 +70,70 @@ const objectDrawings = [
 ];
 const projectDrawing = index => '<svg viewBox="0 0 80 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">' + objectDrawings[index] + '</svg>';
 
-const serviceInquiries = {
+const serviceCopy = {
   ru: {
     heading: 'Лабораторные испытания<br><span class="stage-accent">строительных материалов</span>',
-    intro: 'Выберите материал или выезд на объект. Уточним, какие испытания и показатели доступны по действующей области аккредитации.',
-    titles: ['Испытания грунтов', 'Испытания бетона', 'Испытания асфальтобетона', 'Испытания песка, щебня и нерудных материалов', 'Испытания арматуры', 'Выездные лабораторные испытания'],
-    details: 'Укажите материал и нужные показатели в заявке. Мы уточним доступные испытания по области аккредитации.',
-    site: 'Укажите адрес объекта и задачу. Уточним, какие испытания можно провести на площадке.',
-    order: 'Заказать испытание', selected: 'Выбранная услуга'
+    intro: 'Испытываем строительные материалы в лаборатории и на объектах. Доступные испытания уточняем по действующей области аккредитации.',
+    items: [
+      ["Испытания грунтов","Лабораторная оценка грунтов для оснований зданий, дорог и других сооружений."],
+      ["Испытания бетона","Оценка свойств бетонных образцов для строительных конструкций."],
+      ["Испытания асфальтобетона","Оценка свойств асфальтобетонных образцов для дорожных покрытий."],
+      ["Испытания песка, щебня и нерудных материалов","Оценка свойств сыпучих материалов для строительных смесей и оснований."],
+      ["Испытания арматуры","Оценка свойств арматурной стали для железобетонных конструкций."],
+      ["Выездные лабораторные испытания","Выезд на стройплощадку для отбора образцов и испытаний, которые можно выполнить на месте."]
+    ]
   },
   kk: {
     heading: 'Құрылыс материалдарын зертханалық сынау',
-    intro: 'Материалды немесе нысанға шығуды таңдаңыз. Қолданыстағы аккредиттеу саласына сәйкес сынақтар мен көрсеткіштерді нақтылаймыз.',
-    titles: ['Топырақты сынау', 'Бетонды сынау', 'Асфальтбетонды сынау', 'Құмды, қиыршық тасты және кенсіз материалдарды сынау', 'Арматураны сынау', 'Нысанда зертханалық сынақ жүргізу'],
-    details: 'Өтінімде материал мен қажетті көрсеткіштерді көрсетіңіз. Аккредиттеу саласына сай қолжетімді сынақтарды нақтылаймыз.',
-    site: 'Нысанның мекенжайын және тапсырманы көрсетіңіз. Алаңда қандай сынақ жүргізуге болатынын нақтылаймыз.',
-    order: 'Сынаққа тапсырыс беру', selected: 'Таңдалған қызмет'
+    intro: 'Құрылыс материалдарын зертханада және нысанда сынаймыз. Қолжетімді сынақтарды қолданыстағы аккредиттеу саласына сәйкес нақтылаймыз.',
+    items: [
+      ["Топырақты сынау","Ғимараттар, жолдар және басқа құрылыстар негіздеріне арналған топырақты зертханалық бағалау."],
+      ["Бетонды сынау","Құрылыс конструкцияларына арналған бетон үлгілерінің қасиеттерін бағалау."],
+      ["Асфальтбетонды сынау","Жол жабындарына арналған асфальтбетон үлгілерінің қасиеттерін бағалау."],
+      ["Құмды, қиыршық тасты және кенсіз материалдарды сынау","Құрылыс қоспалары мен негіздеріне арналған сусымалы материалдардың қасиеттерін бағалау."],
+      ["Арматураны сынау","Темірбетон конструкцияларына арналған арматуралық болаттың қасиеттерін бағалау."],
+      ["Нысанда зертханалық сынақ жүргізу","Үлгі алу және жергілікті жерде орындауға болатын сынақтар үшін құрылыс алаңына шығу."]
+    ]
   },
   en: {
     heading: 'Laboratory testing of construction materials',
-    intro: 'Choose a material or request a site visit. We will confirm the tests and properties covered by our current scope of accreditation.',
-    titles: ['Soil testing', 'Concrete testing', 'Asphalt concrete testing', 'Testing of sand, crushed stone and other aggregates', 'Reinforcing steel testing', 'On-site laboratory testing'],
-    details: 'Include the material and the properties you need tested in your inquiry. We will confirm the tests available within our scope of accreditation.',
-    site: 'Provide the site address and your requirements. We will confirm which tests can be carried out on site.',
-    order: 'Request testing', selected: 'Selected service'
+    intro: 'We test construction materials in the laboratory and on site. Available tests are confirmed against the current scope of accreditation.',
+    items: [
+      ["Soil testing","Laboratory assessment of soils for building foundations, roads and other structures."],
+      ["Concrete testing","Assessment of concrete sample properties for structural applications."],
+      ["Asphalt concrete testing","Assessment of asphalt concrete samples for road surfaces."],
+      ["Testing of sand, crushed stone and other aggregates","Assessment of aggregate properties for construction mixes and base layers."],
+      ["Reinforcing steel testing","Assessment of reinforcing steel properties for reinforced concrete structures."],
+      ["On-site laboratory testing","Site visits for sampling and tests that can be carried out on location."]
+    ]
   },
   zh: {
     heading: '建筑材料实验室检测',
-    intro: '请选择材料类别或现场检测。我们将根据现行认可范围确认可开展的检测和指标。',
-    titles: ['土壤检测', '混凝土检测', '沥青混凝土检测', '砂、碎石及其他集料检测', '钢筋检测', '现场实验室检测'],
-    details: '请在申请中注明材料和所需指标。我们将根据认可范围确认可开展的检测。',
-    site: '请提供施工现场地址和检测需求。我们将确认可以在现场开展的检测。',
-    order: '申请检测', selected: '所选服务'
+    intro: '我们在实验室和施工现场开展建筑材料检测，具体项目以现行认可范围为准。',
+    items: [
+      ["土壤检测","对建筑基础、道路和其他构筑物所用土壤进行实验室评估。"],
+      ["混凝土检测","评估建筑结构用混凝土样品的性能。"],
+      ["沥青混凝土检测","评估道路铺装用沥青混凝土样品的性能。"],
+      ["砂、碎石及其他集料检测","评估施工混合料和基层用砂石等集料的性能。"],
+      ["钢筋检测","评估钢筋混凝土结构所用钢筋的性能。"],
+      ["现场实验室检测","前往施工现场取样，并开展可在现场完成的检测。"]
+    ]
   }
 };
 
-function renderServiceInquiries(language) {
-  const copy = serviceInquiries[language];
+function renderServices(language) {
+  const copy = serviceCopy[language];
   document.querySelector('[data-t="serviceTitle"]').innerHTML = copy.heading;
   document.querySelector('[data-t="serviceIntro"]').textContent = copy.intro;
-  document.querySelector('#service-list').innerHTML = copy.titles.map((title, index) =>
-    '<details class="service-item"><summary><h3>' + title + '</h3></summary>' +
-    '<div class="service-disclosure"><p>' + (index === copy.titles.length - 1 ? copy.site : copy.details) +
-    '</p><a class="service-inquiry" href="#request-form" aria-haspopup="dialog" data-service="' + index + '">' +
-    copy.order + '</a></div></details>'
+  document.querySelector('#service-list').innerHTML = copy.items.map(([title, description]) =>
+    '<article class="service-item"><h3>' + title + '</h3><p>' + description + '</p></article>'
   ).join('');
 }
 
 function renderOverview() {
   const language = document.querySelector('#language').value;
   const data = overview[language];
-  renderServiceInquiries(language);
+  renderServices(language);
   document.querySelector('.object-grid').innerHTML = data.objects.map((label, i) => '<article>' + ('<span class="object-index" aria-hidden="true">0' + (i + 1) + '</span><div class="object-visual">' + projectDrawing(i) + '</div>') + '<h3>' + label + '</h3></article>').join('');
   document.querySelector('#benefits').innerHTML = data.strengths.map(([title, description], i) => '<article>' + overviewIcon([4,1,2,3,0,5][i]) + '<div><h3>' + title + '</h3><p>' + description + '</p></div></article>').join('');
   document.querySelector('.process-grid').innerHTML = data.process.map((label, i) => '<li style="--step:' + i + '"><span class="process-marker">' + overviewIcon([5,0,3,1,2,4][i]) + '</span><span class="process-number" aria-hidden="true">0' + (i + 1) + '</span><span class="process-track" aria-hidden="true"></span><p class="process-label">' + label + '</p></li>').join('');
