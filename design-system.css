@@ -318,6 +318,16 @@ main .eyebrow { margin-bottom: 12px; }
   .field-section > div { gap: 16px; padding: var(--card-padding); }
 }
 .service-image p { padding: var(--card-padding); }
+.accreditation > .certificate {
+  align-self: center;
+  padding: clamp(12px, 1.5vw, 18px);
+}
+.accreditation .certificate [data-t="certificateCaption"] {
+  margin-top: 12px;
+  font-size: min(var(--type-secondary), 3.9vw);
+  letter-spacing: normal;
+  white-space: nowrap;
+}
 .contact-section h2 + p { margin-block: var(--heading-gap) 0; }
 @media (min-width: 761px) {
   .contact-section .two-col > :first-child { align-self: center; }
