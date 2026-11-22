@@ -784,3 +784,54 @@ main h3, .service-item h3, .benefits .benefit-copy h3, .benefits .benefit-grid a
   .hero-photo::after { background: linear-gradient(0deg,#083576 0%,#083576ed 43%,#08357670 75%,#08357620 100%); }
   .hero .hero-proof { margin-top: 20px; }
 }
+
+/* Light engineering layouts */
+.project-types .object-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 14px clamp(24px, 5vw, 68px); }
+.project-types .object-grid article {
+  display: grid; grid-template-columns: auto minmax(0,1fr) auto;
+  align-items: center; gap: 16px; min-height: 125px; padding: 16px 0;
+}
+.project-types .object-grid article::after { transform-origin: left; }
+.object-index { color: var(--blue); font: 500 clamp(2rem, 4vw, 3.75rem)/1 Oswald,sans-serif; }
+.project-types .object-grid .object-visual { grid-column: 3; grid-row: 1; height: auto; width: clamp(74px, 10vw, 138px); overflow: visible; }
+.project-types .object-grid .object-visual svg { width: 100%; height: auto; }
+.project-types .object-grid h3 { grid-column: 2; grid-row: 1; padding: 0; font: 500 clamp(1rem, 1.45vw, 1.3rem)/1.4 Inter,sans-serif; }
+.work-process .process-grid { --node: 48px; --step-duration: .7s; margin-top: 20px; }
+.process-grid li { padding: 0 12px; }
+.process-grid h3 { margin: 10px auto 0; max-width: 25ch; text-align: center; text-wrap: balance; font: 500 clamp(.9rem, 1.15vw, 1.0625rem)/1.45 Inter,sans-serif; }
+.process-marker { margin-inline: auto; }
+.process-track { left: calc(50% + var(--node) / 2); right: calc(var(--node) / 2 - 50%); }
+.process-grid .process-marker svg { width: 23px; height: 23px; }
+@media (max-width: 900px) {
+  .process-grid li { padding: 0 0 16px; }
+  .process-grid h3 { margin: 11px 0 0; text-align: left; }
+  .process-track { left: calc(var(--node) / 2); right: auto; }
+}
+@media (max-width: 650px) {
+  .project-types .object-grid { grid-template-columns: 1fr; gap: 0; }
+  .project-types .object-grid article { min-height: 92px; gap: 12px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .process-start .process-track::before, .process-start .process-marker { animation-duration: 9s; animation-timing-function: cubic-bezier(.4,0,.35,1); }
+  .process-start li:hover .process-marker { animation-play-state: running; box-shadow: 0 0 0 4px #0835761c; }
+  .process-marker { transition: background-color .3s, color .3s, box-shadow .3s; }
+  @keyframes process-horizontal {
+    0% { transform: scaleX(0); opacity: .65; }
+    11%, 78% { transform: scaleX(1); opacity: .8; }
+    96%, 100% { transform: scaleX(1); opacity: 0; }
+  }
+  @keyframes process-vertical {
+    0% { transform: scaleY(0); opacity: .65; }
+    11%, 78% { transform: scaleY(1); opacity: .8; }
+    96%, 100% { transform: scaleY(1); opacity: 0; }
+  }
+  @keyframes process-pulse {
+    0%, 17%, 100% { background: #eaf2fc; border-color: var(--track); }
+    7%, 10% { background: #cfe1f9; border-color: #8cadd6; }
+  }
+  .objects-revealed article { animation: object-arrival .55s ease-out both; }
+  .objects-revealed article:nth-child(2) { animation-delay: .07s; }
+  .objects-revealed article:nth-child(3) { animation-delay: .14s; }
+  .objects-revealed article:nth-child(4) { animation-delay: .21s; }
+  @keyframes object-arrival { from { opacity: .35; translate: 0 9px; } to { opacity: 1; translate: none; } }
+}

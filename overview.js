@@ -62,9 +62,16 @@ const overviewIcon = index => '<svg viewBox="0 0 24 24" aria-hidden="true" fill=
 
 for (const lang of Object.keys(overview)) Object.assign(content[lang], overview[lang]);
 
+const objectDrawings = [
+  '<path d="M8 48 28 10h24l20 38M20 48l15-38m25 38L45 10M39 16v6m0 5v7m0 5v7M6 48h68M13 28h7m40 0h7"/>',
+  '<path d="M8 48V22l13-9 14 9v26m0-35 15-7 17 9v33M5 48h68M15 28h4m7 0h3m-14 8h4m7 0h3m14-15h4m7 0h4m-15 8h4m7 0h4m-15 8h4m7 0h4"/>',
+  '<path d="M6 48V24l16 8V20l15 9V17l16 10V11h9l5 37M4 48h72M13 39h6m10 0h6m10 0h6m9 0h6M56 6h5"/>',
+  '<path d="M5 39h70M13 48V16m54 32V16M13 19c13 24 41 24 54 0M23 31v8m10-3v3m14-3v3m10-8v8M5 48h70M7 43h66"/>',
+];
+const projectDrawing = index => '<svg viewBox="0 0 80 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">' + objectDrawings[index] + '</svg>';
 function renderOverview() {
   const data = overview[document.querySelector('#language').value];
-  document.querySelector('.object-grid').innerHTML = data.objects.map((label, i) => '<article>' + ('<div class="object-visual">' + overviewIcon(i) + '</div>') + '<h3>' + label + '</h3></article>').join('');
+  document.querySelector('.object-grid').innerHTML = data.objects.map((label, i) => '<article>' + ('<span class="object-index" aria-hidden="true">0' + (i + 1) + '</span><div class="object-visual">' + projectDrawing(i) + '</div>') + '<h3>' + label + '</h3></article>').join('');
   document.querySelector('#benefits').innerHTML = data.strengths.map(([title, description], i) => '<article>' + overviewIcon([4,1,2,3,0,5][i]) + '<div><h3>' + title + '</h3><p>' + description + '</p></div></article>').join('');
   document.querySelector('.process-grid').innerHTML = data.process.map((label, i) => '<li style="--step:' + i + '"><span class="process-marker">' + overviewIcon([5,0,3,1,2,4][i]) + '</span><span class="process-track" aria-hidden="true"></span><h3>' + label + '</h3></li>').join('');
   document.querySelector('[data-t="whyTitle"]').textContent = data.whyTitle;
@@ -79,4 +86,14 @@ if ('IntersectionObserver' in window) {
     timeline.classList.toggle('process-start', entry.isIntersecting);
   }, {threshold: 0.15});
   timelineObserver.observe(timeline);
+}
+
+const projects = document.querySelector('.object-grid');
+if ('IntersectionObserver' in window) {
+  const projectObserver = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return;
+    projects.classList.add('objects-revealed');
+    projectObserver.disconnect();
+  }, {threshold: .12});
+  projectObserver.observe(projects);
 }
