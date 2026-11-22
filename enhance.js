@@ -1,19 +1,40 @@
 const formCopy = {
-  ru: ['Заявка на лабораторное сопровождение','Ваше имя','Телефон','Электронная почта','Расскажите о проекте','Отправить заявку'],
-  kk: ['Зертханалық сүйемелдеуге өтінім','Аты-жөніңіз','Телефон','Электрондық пошта','Жоба туралы айтыңыз','Өтінім жіберу'],
-  en: ['Request laboratory support','Your name','Phone','Email','Tell us about the project','Send inquiry'],
-  zh: ['申请实验室技术支持','您的姓名','电话','电子邮箱','请介绍您的项目','发送申请'],
+  ru: ['Оставить заявку','Ваше имя','Телефон','Электронная почта (необязательно)','Услуга','Комментарий (необязательно)','Отправить заявку','Выберите услугу'],
+  kk: ['Өтінім қалдыру','Аты-жөніңіз','Телефон','Электрондық пошта (міндетті емес)','Қызмет','Түсініктеме (міндетті емес)','Өтінім жіберу','Қызметті таңдаңыз'],
+  en: ['Request a quote','Your name','Phone','Email (optional)','Service','Comment (optional)','Send inquiry','Select a service'],
+  zh: ['提交申请','您的姓名','电话','电子邮箱（选填）','服务','备注（选填）','发送申请','请选择服务'],
 };
 
 const requestForm = document.querySelector('#request-form');
+const requestServices = ['soil', 'concrete', 'asphalt', 'aggregates', 'rebar', 'onsite'];
+const requestServiceSelect = document.querySelector('#request-service');
+const requestToken = requestForm.elements.namedItem('token');
+let tokenRequest;
 
+function prepareRequest() {
+  tokenRequest ??= fetch('request.php', {cache: 'no-store'})
+    .then(async response => {
+      if (!response.ok) throw new Error('Form token unavailable');
+      const {token} = await response.json();
+      if (typeof token !== 'string' || !token) throw new Error('Missing form token');
+      requestToken.value = token;
+    })
+    .finally(() => { tokenRequest = undefined; });
+  return tokenRequest;
+}
 
 function updateEnhancements() {
   const lang = document.querySelector('#language').value;
   const labels = formCopy[lang];
-  requestForm.querySelectorAll('h3,label:not(#request-check-label),button').forEach((element, index) => {
+  requestForm.querySelectorAll('h3, .request-field label, button[type="submit"]').forEach((element, index) => {
     element.textContent = labels[index];
   });
+  const selected = requestServiceSelect.value;
+  requestServiceSelect.replaceChildren(
+    new Option(labels[7], ''),
+    ...serviceCopy[lang].items.map(([title], index) => new Option(title, requestServices[index]))
+  );
+  requestServiceSelect.value = selected;
   if (lang === 'kk') {
     document.querySelector('h1').textContent = document.querySelector('h1').innerHTML.replaceAll('<br>', ' ');
   }
@@ -46,15 +67,11 @@ requestForm.addEventListener('submit', async event => {
   submit.disabled = true;
   status.textContent = '';
   try {
+    if (!requestToken.value) await prepareRequest();
     const response = await fetch('request.php', {method: 'POST', body: new FormData(requestForm)});
     const result = await response.json();
     if (!response.ok || !result.ok) {
-      await updateChallenge(true);
-      if (result.error === 'captcha') {
-        challengeInput.setCustomValidity(challengeCopy[lang][1]);
-        challengeInput.reportValidity();
-        return;
-      }
+      if (result.error === 'token') requestToken.value = '';
       throw new Error('Request rejected');
     }
     requestForm.reset();
@@ -64,7 +81,7 @@ requestForm.addEventListener('submit', async event => {
     dialog.querySelector('button').textContent = close;
     if (dialog.showModal) dialog.showModal();
     else status.textContent = success;
-    void updateChallenge(true);
+    void prepareRequest().catch(() => {});
   } catch {
     status.textContent = error;
   } finally {
@@ -75,39 +92,7 @@ requestForm.addEventListener('submit', async event => {
 updateEnhancements();
 document.querySelector('#language').addEventListener('change', updateEnhancements);
 
-const challengeInput = document.querySelector('#request-check');
-const challengeLabel = document.querySelector('#request-check-label');
-const challengeCopy = {
-  ru: ['Проверка', 'Введите правильный ответ.', 'необязательно'],
-  kk: ['Тексеру', 'Дұрыс жауапты енгізіңіз.', 'міндетті емес'],
-  en: ['Verification', 'Enter the correct answer.', 'optional'],
-  zh: ['验证', '请输入正确答案。', '选填'],
-};
-async function updateChallenge(regenerate = false) {
-  const [title, , optional] = challengeCopy[document.querySelector('#language').value];
-  requestForm.querySelector('label[for="request-project"]').textContent =
-    formCopy[document.querySelector('#language').value][4] + ' (' + optional + ')';
-  challengeInput.setCustomValidity('');
-  if (!regenerate && challengeLabel.dataset.question) {
-    challengeLabel.textContent = title + ': ' + challengeLabel.dataset.question + ' = ?';
-    return;
-  }
-  challengeInput.value = '';
-  try {
-    const response = await fetch('request.php', {cache:'no-store'});
-    if (!response.ok) throw new Error('Challenge unavailable');
-    const {question} = await response.json();
-    challengeLabel.dataset.question = question;
-    const currentTitle = challengeCopy[document.querySelector('#language').value][0];
-    challengeLabel.textContent = currentTitle + ': ' + question + ' = ?';
-  } catch {
-    challengeLabel.textContent = title;
-    document.querySelector('#request-help').textContent = sendCopy[document.querySelector('#language').value][2];
-  }
-}
-challengeInput.addEventListener('input', () => challengeInput.setCustomValidity(''));
-document.querySelector('#language').addEventListener('change', () => updateChallenge());
-updateChallenge(true);
+void prepareRequest().catch(() => {});
 
 const hero = document.querySelector('.hero');
 const motion = matchMedia('(prefers-reduced-motion: no-preference) and (pointer: fine)');
