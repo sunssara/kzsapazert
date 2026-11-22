@@ -26,7 +26,7 @@ $answer = $_SESSION['challenge'] ?? null;
 $created = $_SESSION['challenge_time'] ?? 0;
 unset($_SESSION['challenge'], $_SESSION['challenge_time']);
 $data = [];
-foreach (['name' => 100, 'phone' => 50, 'email' => 150, 'project' => 1000, 'check' => 2] as $field => $limit) {
+foreach (['name' => 100, 'phone' => 50, 'email' => 150, 'project' => 1000, 'service' => 100, 'check' => 2] as $field => $limit) {
     $value = $_POST[$field] ?? '';
     if (!is_string($value) || strlen($value) > $limit * 4 || str_contains($value, "\0")) {
         respond(400, ['ok' => false]);
@@ -44,6 +44,9 @@ if (time() - ($_SESSION['last_request'] ?? 0) < 30) {
     respond(429, ['ok' => false]);
 }
 $message = "Имя: {$data['name']}\nТелефон: {$data['phone']}\nПочта: {$data['email']}";
+if ($data['service'] !== '') {
+    $message .= "\nУслуга: {$data['service']}";
+}
 if ($data['project'] !== '') {
     $message .= "\nОписание: {$data['project']}";
 }

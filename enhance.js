@@ -158,21 +158,32 @@ const projectDialog = document.querySelector('#project-dialog');
 const projectFormHome = requestForm.parentElement;
 const projectClose = projectDialog.querySelector('.project-close');
 let projectTrigger;
-document.querySelectorAll(':is(a[data-t="cta"], a[data-t="writeUs"], a[data-t="quote"])[href="#request-form"]').forEach(trigger => {
-  trigger.setAttribute('aria-haspopup', 'dialog');
-  trigger.addEventListener('click', event => {
-    if (!projectDialog.showModal) return;
-    event.preventDefault();
-    projectTrigger = trigger;
-    projectClose.ariaLabel = {ru:'Закрыть',kk:'Жабу',en:'Close',zh:'关闭'}[document.querySelector('#language').value];
-    projectDialog.append(requestForm);
-    projectDialog.showModal();
-    projectClose.focus();
-  });
+const projectLinks = ':is(a[data-t="cta"], a[data-t="writeUs"], a[data-t="quote"], .service-inquiry)[href="#request-form"]';
+const requestService = requestForm.querySelector('.request-service');
+const requestServiceInput = requestService.querySelector('input');
+document.querySelectorAll(projectLinks).forEach(link => link.setAttribute('aria-haspopup', 'dialog'));
+document.addEventListener('click', event => {
+  const trigger = event.target.closest(projectLinks);
+  if (!trigger) return;
+  const lang = document.querySelector('#language').value;
+  const service = trigger.dataset.service;
+  requestService.hidden = service === undefined;
+  requestServiceInput.value = service === undefined ? '' : serviceInquiries.ru.titles[service];
+  requestService.querySelector('span').textContent = service === undefined ? '' :
+    serviceInquiries[lang].selected + ': ' + serviceInquiries[lang].titles[service];
+  if (!projectDialog.showModal) return;
+  event.preventDefault();
+  projectTrigger = trigger;
+  projectClose.ariaLabel = {ru:'Закрыть',kk:'Жабу',en:'Close',zh:'关闭'}[lang];
+  projectDialog.append(requestForm);
+  projectDialog.showModal();
+  projectClose.focus();
 });
 projectClose.addEventListener('click', () => projectDialog.close());
 projectDialog.addEventListener('close', () => {
   projectFormHome.append(requestForm);
+  requestService.hidden = true;
+  requestServiceInput.value = '';
   projectTrigger?.focus({preventScroll:true});
 });
 
