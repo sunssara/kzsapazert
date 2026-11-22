@@ -14,6 +14,8 @@
   --type-card: clamp(1.125rem, 1.65vw, 1.375rem);
   --radius-control: 10px;
   --radius-panel: 16px;
+  --card-padding: 24px;
+  --card-gap: 12px;
   --motion-in: 460ms;
   --motion-ui: 240ms;
   --motion-ease: cubic-bezier(.22, .65, .28, 1);
@@ -90,11 +92,41 @@ main .small, .contact-details span, .certificate span, #request-help { font-size
     bottom: calc(var(--node) / 2 - 50%);
   }
 }
-.service-item { padding-block: clamp(14px, 1.8vw, 22px); border-color: var(--edge); }
-.service-item p, .benefit-grid article p { margin-top: 8px; }
-.field-section > div { padding: clamp(24px, 4vw, 56px); }
+.service-item,
+.benefits .benefit-grid article,
+.benefits .benefit-grid article:is(:first-child, :last-child),
+.project-types .object-grid article,
+.field-section > div,
+.certificate,
+#request-form {
+  min-inline-size: 0;
+  padding: var(--card-padding);
+  overflow-wrap: anywhere;
+}
+.service-item { border-color: var(--edge); }
+.service-item p, .benefit-grid article p { margin: var(--card-gap) 0 0; }
+.benefits .benefit-grid article {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 0;
+}
+.benefits .benefit-grid article > svg {
+  margin: 0 0 var(--card-gap);
+  flex: none;
+}
+.project-types .object-grid article {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto 1fr;
+  align-items: start;
+  gap: var(--card-gap);
+  min-height: 0;
+}
+.project-types .object-grid .object-visual { grid-column: 1; grid-row: 1; }
+.project-types .object-grid .object-index { grid-column: 2; grid-row: 1; }
+.project-types .object-grid h3 { grid-column: 1 / -1; grid-row: 2; }
+.service-image p { padding: var(--card-padding); }
 .contact-section .contact-details { margin-top: var(--content-gap); }
-#request-form { padding: clamp(20px, 3vw, 32px); }
 footer { padding-block: clamp(24px, 3vw, 40px); }
 @media (min-width: 761px) and (max-width: 1023px) {
   :root { --section-space: 56px; --grid-gap: 26px; }
@@ -104,6 +136,7 @@ footer { padding-block: clamp(24px, 3vw, 40px); }
 @media (max-width: 760px) {
   :root {
     --gutter: clamp(16px, 5vw, 28px);
+    --card-padding: 20px;
     --section-space: clamp(40px, 8vw, 54px);
     --grid-gap: 22px;
     --content-gap: 20px;
@@ -113,7 +146,6 @@ footer { padding-block: clamp(24px, 3vw, 40px); }
   }
   .hero .hero-copy h1, .hero .hero-copy h1:lang(ru), .hero .hero-copy h1:lang(zh-CN) { overflow-wrap: anywhere; }
   .hero .actions .button { max-width: 100%; }
-  .field-section > div { padding: 24px; }
   .contact-details .email { overflow-wrap: anywhere; }
 }
 @media (prefers-reduced-motion: no-preference) {
