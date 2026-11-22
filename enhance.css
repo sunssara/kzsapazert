@@ -726,3 +726,45 @@ body:has(#certificate-gallery[open]) { overflow: hidden; }
   @keyframes process-pulse { 50% { background-color: var(--blue); color: white; } }
   @media (max-width: 900px) { .process-start .process-track::before { animation-name: process-vertical; } }
 }
+
+:root {
+  --section-space: clamp(56px, 6.5vw, 96px);
+  --content-gap: clamp(20px, 3vw, 36px);
+  --type-section: clamp(2.125rem, 4.1vw, 3.75rem);
+  --type-card: clamp(1.25rem, 1.75vw, 1.625rem);
+}
+.project-types, .benefits, .work-process, .accreditation { margin-block: 0; padding-block: var(--section-space); }
+.project-types, .work-process { padding-bottom: calc(var(--section-space) / 2); }
+.project-types + .benefits, .work-process + .accreditation { padding-top: calc(var(--section-space) / 2); }
+main h2, main .benefits > h2 { line-height: 1.14; }
+main h3, .service-item h3, .benefits .benefit-copy h3, .benefits .benefit-grid article h3, .process-grid h3 { font-size: var(--type-card); line-height: 1.24; }
+.object-grid, .process-grid, .benefits .benefit-grid { margin-top: var(--content-gap); }
+.services-section .section-head { margin-bottom: var(--content-gap); }
+.contact-section .contact-details { margin-top: var(--content-gap); }
+.accreditation .actions { margin-top: var(--content-gap); }
+@media (max-width: 760px) {
+  :root { --section-space: 48px; --content-gap: 24px; --type-section: clamp(1.875rem, 7vw, 2.625rem); --type-card: 1.375rem; }
+  .process-grid li { padding-bottom: 20px; }
+  .process-grid li:last-child { padding-bottom: 0; }
+  .project-types .object-grid .object-visual { height: 88px; }
+  .project-types .object-grid .object-visual svg { width: 70px; height: 70px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .process-start .process-track::before,
+  .process-start .process-marker { animation-duration: 6s; animation-iteration-count: infinite; }
+  @keyframes process-horizontal {
+    0% { transform: scaleX(0); opacity: 1; }
+    7%, 78% { transform: scaleX(1); opacity: 1; }
+    90%, 100% { transform: scaleX(1); opacity: 0; }
+  }
+  @keyframes process-vertical {
+    0% { transform: scaleY(0); opacity: 1; }
+    7%, 78% { transform: scaleY(1); opacity: 1; }
+    90%, 100% { transform: scaleY(1); opacity: 0; }
+  }
+  @keyframes process-pulse {
+    4%, 8% { background-color: var(--blue); color: white; }
+    0%, 13%, 100% { background-color: #eaf2fc; color: var(--blue); }
+  }
+  .process-start li:hover .process-marker { animation-play-state: paused; }
+}

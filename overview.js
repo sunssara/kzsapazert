@@ -77,9 +77,7 @@ renderOverview();
 const timeline = document.querySelector('.process-grid');
 if ('IntersectionObserver' in window) {
   const timelineObserver = new IntersectionObserver(([entry]) => {
-    if (!entry.isIntersecting) return;
-    timeline.classList.add('process-start');
-    timelineObserver.disconnect();
+    timeline.classList.toggle('process-start', entry.isIntersecting);
   }, {threshold: 0.15});
   timelineObserver.observe(timeline);
 }
