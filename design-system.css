@@ -277,6 +277,7 @@ main .eyebrow { margin-bottom: 12px; }
   overflow-wrap: anywhere;
 }
 .service-item { border-color: var(--edge); }
+.services-section .service-quote { margin-inline: var(--card-padding); max-inline-size: calc(100% - 2 * var(--card-padding)); }
 .service-item p, .benefit-grid article p { margin: var(--card-gap) 0 0; }
 .benefits .benefit-grid article {
   display: flex;
