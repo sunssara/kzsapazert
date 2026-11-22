@@ -321,8 +321,10 @@ main .eyebrow { margin-bottom: 12px; }
   .field-section > div { gap: 16px; padding: var(--card-padding); }
 }
 .service-image p { padding: var(--card-padding); }
+.accreditation { align-items: center; }
 .accreditation > .certificate {
-  align-self: center;
+  margin-block: 0;
+  transform: none;
   padding: clamp(12px, 1.5vw, 18px);
 }
 .accreditation .certificate [data-t="certificateCaption"] {
