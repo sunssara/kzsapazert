@@ -208,6 +208,17 @@ main .eyebrow { margin-bottom: 12px; }
   .process-grid li:nth-child(4) { grid-area: 2 / 3; }
   .process-grid li:nth-child(5) { grid-area: 2 / 2; }
   .process-grid li:nth-child(6) { grid-area: 2 / 1; }
+  .process-grid li:is(:first-child, :last-child) { padding-inline-start: 0; }
+  .process-grid li:is(:first-child, :last-child) .process-marker { margin-inline-start: 0; }
+  .process-grid li:is(:first-child, :last-child) .process-number { left: calc(var(--node) - 15px); }
+  .process-grid li:first-child .process-track { left: calc(var(--node) / 2); }
+  .process-grid li:is(:first-child, :nth-child(5)) .process-track {
+    width: calc(150% - var(--node) / 2);
+  }
+  .work-process .process-grid li:is(:first-child, :last-child) .process-label {
+    margin-inline-start: 0;
+    text-align: left;
+  }
   .process-grid li:nth-child(n+4) .process-track { right: 50%; left: auto; }
   .process-grid li:nth-child(n+4) .process-track::before { transform-origin: right; }
   .process-grid li:nth-child(3) .process-track {
