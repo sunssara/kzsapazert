@@ -620,3 +620,9 @@ body:has(#certificate-gallery[open]) { overflow: hidden; }
   .direction-grid, .benefits .benefit-grid { grid-template-columns: minmax(0,1fr); }
   .benefits .benefit-grid article:nth-child(even) { border-inline: 0; }
 }
+
+.field-section > .field-photos { align-self: stretch; display: grid; grid-template-rows: 1fr 1fr; gap: 3px; padding: 0; min-height: 360px; }
+.field-photos img { width: 100%; height: 0; min-height: 100%; object-fit: cover; object-position: center 64%; }
+@media (max-width: 760px) {
+  .field-section > .field-photos { min-height: 0; grid-template: 180px / repeat(2,minmax(0,1fr)); }
+}
