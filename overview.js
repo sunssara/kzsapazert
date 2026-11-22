@@ -14,7 +14,7 @@ const overview = {
     whyTitle: 'Наши преимущества',
     strengths: [['Аккредитованная лаборатория','Испытания в пределах области аккредитации.'],['Квалифицированные специалисты','Проводят испытания и оценивают результаты.'],['Испытательное оборудование','Подбираем оборудование под метод испытаний.'],['Выезд на объекты','Отбор проб и предусмотренные испытания на месте.'],['Работа по нормативам','Учитываем требования проекта и применимые стандарты.'],['Документируем результаты','Выдаём протоколы испытаний и согласованные документы.']],
     processTitle: 'Как мы работаем',
-    process: ['Получаем заявку','Уточняем виды испытаний','Согласуем сроки и условия','Принимаем образцы или выезжаем на объект','Проводим испытания','Передаём результаты'],
+    process: ['Получаем заявку','Уточняем виды испытаний','Согласуем сроки и условия','Принимаем образцы или выезжаем','Проводим испытания','Передаём результаты'],
   },
   kk: {
     headline:'АККРЕДИТТЕЛГЕН ҚҰРЫЛЫС СЫНАҚ ЗЕРТХАНАСЫ',
@@ -73,7 +73,7 @@ function renderOverview() {
   const data = overview[document.querySelector('#language').value];
   document.querySelector('.object-grid').innerHTML = data.objects.map((label, i) => '<article>' + ('<span class="object-index" aria-hidden="true">0' + (i + 1) + '</span><div class="object-visual">' + projectDrawing(i) + '</div>') + '<h3>' + label + '</h3></article>').join('');
   document.querySelector('#benefits').innerHTML = data.strengths.map(([title, description], i) => '<article>' + overviewIcon([4,1,2,3,0,5][i]) + '<div><h3>' + title + '</h3><p>' + description + '</p></div></article>').join('');
-  document.querySelector('.process-grid').innerHTML = data.process.map((label, i) => '<li style="--step:' + i + '"><span class="process-marker">' + overviewIcon([5,0,3,1,2,4][i]) + '</span><span class="process-track" aria-hidden="true"></span><h3>' + label + '</h3></li>').join('');
+  document.querySelector('.process-grid').innerHTML = data.process.map((label, i) => '<li style="--step:' + i + '"><span class="process-marker">' + overviewIcon([5,0,3,1,2,4][i]) + '</span><span class="process-track" aria-hidden="true"></span><p class="process-label">' + label + '</p></li>').join('');
   document.querySelector('[data-t="whyTitle"]').textContent = data.whyTitle;
 }
 document.querySelector('#language').addEventListener('change', renderOverview);

@@ -29,12 +29,14 @@ main h2, main .benefits > h2 {
   overflow-wrap: anywhere;
 }
 main h3, .service-item h3, .benefits .benefit-grid article h3,
-.project-types .object-grid h3, .work-process .process-grid h3,
+.project-types .object-grid h3, .benefits .benefit-copy h3,
 #project-dialog h3, #request-success h3, #request-form h3 {
   font: 500 var(--type-card)/1.36 var(--body-font);
   letter-spacing: -.015em;
 }
 main p, .benefit-grid article p, .service-item p { font: 400 1rem/1.65 var(--body-font); }
+main .service-image p { font-size: .875rem; line-height: 1.5; }
+main .photo-label p { font: 500 var(--type-card)/1.36 var(--heading-font); }
 main .large, .hero .lead { font-size: clamp(1.0625rem, 1.35vw, 1.1875rem); line-height: 1.55; }
 main .eyebrow { margin-bottom: 12px; font: 600 .8125rem/1.5 var(--body-font); letter-spacing: .12em; }
 main .small, .contact-details span, .certificate span, #request-help { font-size: .875rem; line-height: 1.5; }
@@ -48,9 +50,46 @@ main .small, .contact-details span, .certificate span, #request-help { font-size
 .hero .hero-proof { margin-top: 24px; }
 .two-col, .services-section .service-layout, .accreditation { gap: var(--grid-gap); }
 .intro-section, .services-section, .project-types, .benefits, .work-process, .accreditation, .contact-section { padding-block: var(--section-space); }
-.project-types, .work-process { padding-bottom: calc(var(--section-space) / 2); }
+.project-types { padding-bottom: calc(var(--section-space) / 2); }
+.work-process { padding-bottom: clamp(24px, 3vw, 40px); }
 .project-types + .benefits, .work-process + .accreditation { padding-top: calc(var(--section-space) / 2); }
 .benefits .benefit-grid, .object-grid, .work-process .process-grid { margin-top: var(--content-gap); }
+.work-process .process-grid {
+  --process-gap: clamp(12px, 1.3vw, 18px);
+  --track-inset: 7px;
+  margin-top: clamp(22px, 3vw, 36px);
+}
+.work-process .process-grid li { padding: 0 8px; }
+.process-marker { margin-inline: auto; }
+.work-process .process-label {
+  inline-size: min(100%, 22ch);
+  margin: var(--process-gap) auto 0;
+  color: var(--ink);
+  font: 500 1rem/1.45 var(--body-font);
+  text-align: center;
+  text-wrap: balance;
+}
+.process-track {
+  left: calc(50% + var(--node) / 2 + var(--track-inset));
+  right: calc(var(--node) / 2 + var(--track-inset) - 50%);
+  top: calc(var(--node) / 2);
+}
+@media (max-width: 900px) {
+  .work-process .process-grid { grid-auto-rows: 1fr; }
+  .work-process .process-grid li {
+    grid-template-columns: var(--node) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--process-gap);
+    padding: 8px 0;
+  }
+  .work-process .process-label { inline-size: min(100%, 24ch); margin: 0 auto; }
+  .process-track {
+    left: calc(var(--node) / 2);
+    right: auto;
+    top: calc(50% + var(--node) / 2);
+    bottom: calc(var(--node) / 2 - 50%);
+  }
+}
 .service-item { padding-block: clamp(14px, 1.8vw, 22px); border-color: var(--edge); }
 .service-item p, .benefit-grid article p { margin-top: 8px; }
 .field-section > div { padding: clamp(24px, 4vw, 56px); }
