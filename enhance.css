@@ -626,3 +626,34 @@ body:has(#certificate-gallery[open]) { overflow: hidden; }
   .object-grid,.process-grid,.benefits .benefit-grid { grid-template-columns:1fr; }
 }
 .object-photo { width:100%; height:100px; object-fit:cover; border-radius:8px; } .object-grid small { display:block; margin:4px 0 12px; }
+
+.project-types .object-grid { gap: clamp(12px, 1.8vw, 24px); }
+.project-types .object-grid article {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  background: #f2f6fc;
+  border: 1px solid #dce7f4;
+  border-radius: 18px;
+}
+.object-visual {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #083576;
+  background-image: radial-gradient(ellipse at 50% 55%, #347ac080, transparent 64%),
+    linear-gradient(#9ec8ff22 1px, transparent 1px), linear-gradient(90deg,#9ec8ff22 1px,transparent 1px);
+  background-size: auto, 20px 20px, 20px 20px;
+}
+.object-grid .object-visual svg {
+  width: 45%; height: 70%; margin: 0; color: #e4f1ff;
+  filter: drop-shadow(0 0 8px #8cbafa80);
+}
+.project-types .object-grid h3 { padding: 16px 10px 14px; color: #102745; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project-types .object-grid article, .object-grid .object-visual svg { transition: transform .25s ease, box-shadow .25s ease; }
+  .project-types .object-grid article:hover { transform: translateY(-4px); box-shadow: 0 12px 28px #08357624; }
+  .object-grid article:hover .object-visual svg { transform: scale(1.12); }
+}

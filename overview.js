@@ -65,7 +65,7 @@ for (const lang of Object.keys(overview)) Object.assign(content[lang], overview[
 function renderOverview() {
   const data = overview[document.querySelector('#language').value];
   document.querySelector('.hero-directions').innerHTML = data.directions.map(label => '<li>' + label + '</li>').join('');
-  document.querySelector('.object-grid').innerHTML = data.objects.map((label, i) => '<article>' + (i === 0 ? '<img class="object-photo" src="roads-stock.jpg" alt="" loading="lazy"><small>' + data.illustration + '</small>' : '') + overviewIcon(i) + '<h3>' + label + '</h3></article>').join('');
+  document.querySelector('.object-grid').innerHTML = data.objects.map((label, i) => '<article>' + ('<div class="object-visual">' + overviewIcon(i) + '</div>') + '<h3>' + label + '</h3></article>').join('');
   document.querySelector('#benefits').innerHTML = data.strengths.map(([title, description], i) => '<article>' + overviewIcon([4,1,2,3,0,5][i]) + '<div><h3>' + title + '</h3><p>' + description + '</p></div></article>').join('');
   document.querySelector('.process-grid').innerHTML = data.process.map((label, i) => '<li>' + overviewIcon([5,0,3,1,2,4][i]) + '<h3>' + label + '</h3></li>').join('');
   document.querySelector('[data-t="whyTitle"]').textContent = data.whyTitle;
