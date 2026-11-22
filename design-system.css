@@ -67,6 +67,7 @@ main .eyebrow, main .photo-label > span {
 main .eyebrow { margin-bottom: 12px; }
 #site-nav a { font-weight: 500; }
 .contact-details > a:not(.button) { font-family: var(--body-font); }
+.contact-details > a[href^="tel:"] { font-family: var(--heading-font); }
 .project-types .object-index { font-family: var(--body-font); }
 .button, select, .menu-toggle, #request-form input, #request-form textarea, .project-close { border-radius: var(--radius-control); }
 .button { min-height: 44px; padding: 12px 19px; text-align: center; font: 500 var(--type-button)/var(--leading-caption) var(--body-font); }
