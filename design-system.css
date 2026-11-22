@@ -319,7 +319,19 @@ main .eyebrow { margin-bottom: 12px; }
 }
 .service-image p { padding: var(--card-padding); }
 .contact-section h2 + p { margin-block: var(--heading-gap) 0; }
-.contact-section .contact-details { margin-top: var(--content-gap); }
+@media (min-width: 761px) {
+  .contact-section .two-col > :first-child { align-self: center; }
+}
+.contact-section .contact-details {
+  --contact-gap: 8px;
+  gap: var(--contact-gap);
+  margin-top: var(--content-gap);
+  padding-inline: 0;
+  text-align: left;
+}
+.contact-section .contact-details > :is(span, address) { margin: 0; }
+.contact-section .contact-details .contact-cta { margin-block: var(--contact-gap); }
+.contact-section .contact-details .contact-address { margin-top: var(--contact-gap); }
 footer { padding-block: clamp(24px, 3vw, 40px); }
 @media (min-width: 761px) and (max-width: 1023px) {
   :root { --section-space: 56px; --grid-gap: 26px; --type-hero: 2.75rem; --type-section: 2.25rem; --type-card: 1.25rem; --type-body: 1rem; }
