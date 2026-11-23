@@ -1,8 +1,8 @@
 const formCopy = {
-  ru: ['Оставить заявку','Ваше имя','Телефон','Электронная почта (необязательно)','Услуга','Комментарий (необязательно)','Отправить заявку','Выберите услугу'],
-  kk: ['Өтінім қалдыру','Аты-жөніңіз','Телефон','Электрондық пошта (міндетті емес)','Қызмет','Түсініктеме (міндетті емес)','Өтінім жіберу','Қызметті таңдаңыз'],
-  en: ['Request a quote','Your name','Phone','Email (optional)','Service','Comment (optional)','Send inquiry','Select a service'],
-  zh: ['提交申请','您的姓名','电话','电子邮箱（选填）','服务','备注（选填）','发送申请','请选择服务'],
+  ru: ['Оставить заявку','Ваше имя','Телефон','Электронная почта (необязательно)','Услуга','Комментарий (необязательно)','Отправить заявку','Выберите услугу', 'Другое'],
+  kk: ['Өтінім қалдыру','Аты-жөніңіз','Телефон','Электрондық пошта (міндетті емес)','Қызмет','Түсініктеме (міндетті емес)','Өтінім жіберу','Қызметті таңдаңыз', 'Басқа'],
+  en: ['Request a quote','Your name','Phone','Email (optional)','Service','Comment (optional)','Send inquiry','Select a service', 'Other'],
+  zh: ['提交申请','您的姓名','电话','电子邮箱（选填）','服务','备注（选填）','发送申请','请选择服务', '其他'],
 };
 
 const requestForm = document.querySelector('#request-form');
@@ -34,7 +34,8 @@ function updateEnhancements() {
   const selected = requestServiceSelect.value;
   requestServiceSelect.replaceChildren(
     new Option(labels[7], ''),
-    ...serviceCopy[lang].items.map(([title], index) => new Option(title, requestServices[index]))
+    ...serviceCopy[lang].items.map(([title], index) => new Option(title, requestServices[index])),
+    new Option(labels[8], 'other')
   );
   requestServiceSelect.value = selected;
   if (lang === 'kk') {
